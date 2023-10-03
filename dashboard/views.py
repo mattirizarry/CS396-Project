@@ -11,18 +11,12 @@ def index(request):
     return render(request, "index.html")
 
 def create_discussion_post(request):
-
-    print(request.user)
-
     if request.method == "POST":
         form = CreateDiscussionPostForm(request.POST)
 
         if form.is_valid():
             title = form.cleaned_data.get("title")
             content = form.cleaned_data.get("content")
-            
-            # the discussionpost model also belongs to the user model
-            # so we can get the user from the request
             
             user = request.user
 
