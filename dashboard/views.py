@@ -105,7 +105,9 @@ def create_comment(request, post_id):
             created_comment.post = post
             created_comment.save()
 
-            return redirect("index")
+            # refresh the page
+            return redirect("view_discussion", post_id)
+            
 
 def register(request):
     

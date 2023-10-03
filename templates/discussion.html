@@ -2,20 +2,54 @@
 
 {% block content %}
 
-<h1>{{discussion.title}}</h1>
-<p>{{discussion.description}}</p>
+<main class="main-body">
+    <section class="asm-two-column">
+        <section class="main-column">
+            <section class="container">
+                <section class="container-body">
+                    <section class="discussion">
+                        <section class="author-details">
+                            <section class="author-image"></section>
+                            <h4>{{discussion.user}}</h4>
+                        </section>
+                        <section class="discussion-body">
+                            <h4>{{discussion.title}}</h4>
+                            <p>{{discussion.description}}</p>
+                        </section>
+                        <section class="discussion-buttons">
+                            <section class="ratio">
+                                <button>Like</button>
+                                <p>12</p>
+                                <button>Dislike</button>
+                            </section>
+                        </section>
+                        <section class="replies">
+                            {% for comment in comments %}
+                            <section class="reply">
+                                <section class="reply-author">
+                                    <section class="author-image">
 
-<h2>Comments</h2>
-{% for comment in comments %}
-    <h3>{{comment.user}}</h3>
-    <p>{{comment.body}}</p>
-{% endfor %}
-
-<form class="create-discussion-comment-form" action="{% url 'create_comment' post_id=discussion.id %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Comment</button>
-</form>
-
+                                    </section>
+                                    <h3>{{comment.user}}</h3>
+                                </section>
+                                <section class="reply-content">
+                                    <p>{{comment.commentBody}}</p>
+                                </section>
+                            </section>
+                            {% endfor %}
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <aside class="secondary-column">
+            <form class="create-discussion-comment-form" action="{% url 'create_comment' post_id=discussion.id %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Create Comment</button>
+            </form>
+        </aside>
+    </section>
+</main>
 
 {% endblock content %}

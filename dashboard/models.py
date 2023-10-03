@@ -44,7 +44,7 @@ class DiscussionPost(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 class DiscussionComment(models.Model):
-    comment = models.TextField()
+    commentBody = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)

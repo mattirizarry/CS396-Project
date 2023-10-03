@@ -87,8 +87,8 @@ class CreateDiscussionCommentForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateDiscussionCommentForm, self).__init__(*args, **kwargs)
 
-        self.fields['comment'].widget = forms.Textarea(attrs={'rows': 4, 'placeholder': 'Add your comment here...'})
+        self.fields['commentBody'].widget = forms.Textarea(attrs={'rows': 4, 'placeholder': 'Add your comment here...'})
 
     class Meta:
         model = DiscussionComment
-        fields = ['comment']
+        fields = ['commentBody']

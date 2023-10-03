@@ -38,7 +38,7 @@
       </section>
       <section class="container">
         <section class="container-header">
-          <h3>Discussion</h3>
+          <h3>Discussions ({{discussions.count}})</h3>
           <a href="{% url 'create_discussion_post' %}">Create</a>
         </section>
 
@@ -63,7 +63,6 @@
                 </section>
                 <a href="{% url 'view_discussion' discussion.id %}">View & Comment</a>
               </section>
-              <section class="discussion-replies"></section>
             </section>
             {% endfor %}
           </section>
