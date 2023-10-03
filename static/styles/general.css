@@ -41,7 +41,7 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
-.asm-two-column .main-column .container .container-header a {
+.asm-two-column .main-column .container .container-header a, .asm-two-column .main-column .container .container-header button {
     justify-self: end;
 }
 

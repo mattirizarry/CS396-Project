@@ -3,21 +3,24 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 
 from .forms import RegistrationForm, CreateDiscussionPostForm
+from .models import Course, DiscussionPost
 
 def index(request):
     if not request.user.is_authenticated:
         return redirect("login")
+    
+    enrolled_courses = Course.objects.filter(students=request.user)
 
-    return render(request, "index.html")
+    # sorted by most recent
+    discussions = DiscussionPost.objects.all().order_by("-created_date")
+
+    return render(request, "index.html", {"enrolled_courses": enrolled_courses, "discussions": discussions })
 
 def create_discussion_post(request):
     if request.method == "POST":
         form = CreateDiscussionPostForm(request.POST)
 
         if form.is_valid():
-            title = form.cleaned_data.get("title")
-            content = form.cleaned_data.get("content")
-            
             user = request.user
 
             created_post = form.save(commit=False)

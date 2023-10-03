@@ -12,82 +12,73 @@
     
                 <section class="container-body">
                     <section class="courses">
+                        {% if enrolled_courses %}
+                        {% for course in enrolled_courses %}
                         <section class="course">
                             <section class="course-image">
     
                             </section>
                             <section class="course-meta">
                                 <section class="course-details">
-                                    <h4>Course Name</h4>
-                                    <p>Teacher</p>
+                                    <h4>{{ course.name }}</h4>
+                                    <p>{{ course.instructor }}</p>
                                 </section>
                                 <a href="#">View</a>
                             </section>
                         </section>
+                        {% endfor %}
+                        {% else %}
                         <section class="course">
                             <section class="course-image">
     
                             </section>
                             <section class="course-meta">
                                 <section class="course-details">
-                                    <h4>Course Name</h4>
-                                    <p>Teacher</p>
+                                    <h4>No Courses</h4>
+                                    <p>Enroll in a course to get started.</p>
                                 </section>
                                 <a href="#">View</a>
                             </section>
-                        </section>
-                        <section class="course">
-                            <section class="course-image">
-    
-                            </section>
-                            <section class="course-meta">
-                                <section class="course-details">
-                                    <h4>Course Name</h4>
-                                    <p>Teacher</p>
-                                </section>
-                                <a href="#">View</a>
-                            </section>
-                        </section>
+                        </section>   
+                        {% endif %}
                     </section>
                 </section>
             </section>
             <section class="container">
                 <section class="container-header">
                     <h3>Discussion</h3>
+                    <a href="{% url 'create_discussion_post' %}">Create</a>
                 </section>
     
                 <section class="container-body">
                     <section class="discussions">
+
+                        <!-- create a loop to display all discussion posts -->
+                        {% for discussion in discussions %}
+                        
+                    
+
+
+
+
+
+
                         <section class="discussion">
                             <section class="author-details">
                                 <section class="author-image">
 
                                 </section>
-                                <h4>Author Name</h4>
+                                <h4>{{discussion.user}}</h4>
                             </section>
                             <section class="discussion-body">
-                                <h4>Discussion Title</h4>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium provident reiciendis corrupti vero nihil esse eveniet blanditiis a fugit. A qui quae veritatis vitae. Reprehenderit minima nostrum aperiam molestiae quia possimus quis at quo, quaerat nesciunt. Cumque culpa minus odit magni quod iure, fugiat atque assumenda commodi fugit deserunt quae asperiores eius corrupti eos nobis similique reiciendis. Accusamus corporis doloremque reprehenderit minus iure qui officia laboriosam, velit corrupti molestias recusandae id tempora excepturi aspernatur accusantium eaque quos porro perferendis rerum pariatur enim at consequuntur eius autem? Fuga eveniet aperiam ad!</p>
+                                <h4>{{discussion.title}}</h4>
+                                <p>{{discussion.description}}</p>
                             </section>
                             <section class="discussion-replies">
 
                             </section>
                         </section>
-                        <section class="discussion">
-                            <section class="author-details">
-                                <section class="author-image">
-                                    
-                                </section>
-                                <h4>Author Name</h4>
-                            </section>
-                            <section class="discussion-body">
-                                <h4>Discussion Title</h4>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Culpa placeat sequi perspiciatis similique nobis! Voluptatem alias, consequuntur nesciunt quia eius rerum tenetur, optio sint repellat, iusto ex quibusdam repellendus accusamus distinctio ducimus culpa pariatur sunt est facere vero labore quidem? Distinctio atque, exercitationem laboriosam quae dignissimos esse est dolorem. Provident corrupti fuga illum ex sed odit obcaecati hic quod architecto qui voluptatum tenetur dolores itaque ratione et dolore excepturi, similique voluptatibus eum repudiandae! Quae alias laborum delectus! Saepe nulla culpa itaque dolores. Ipsa hic amet accusamus minima consequuntur vitae soluta.</p>
-                            </section>
-                            <section class="discussion-replies">
-
-                            </section>
-                        </section>
+                        {% endfor %}
                     </section>
                 </section>
             </section>
@@ -104,11 +95,16 @@
             </section>
             <nav class="secondary-nav">
                 <ul>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
-                    <li>Lorem, ipsum.</li>
+                    <!--    create a logout link below -->
+
+
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                    <!-- createa a link to reset password-->
+
+                    <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
+
+                    
                 </ul>
             </nav>
         </aside>

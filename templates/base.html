@@ -26,10 +26,18 @@
                 </section>
             </nav>
             <section class="jumbotron">
+                <!-- conditionally render based on if the user is logged in or not -->
+                {% if user.is_authenticated %}
                 <section class="jumbotron-content">
                     <h1>Hi {{ user.username }}!</h1>
                     <p>Here are your courses and discussions.</p>
                 </section>
+                {% else %}
+                <section class="jumbotron-content">
+                    <h1>Hi there!</h1>
+                    <p>Sign in to see your current courses and discussions.</p>
+                </section>
+                {% endif %}
             </section>
         </header>
         
