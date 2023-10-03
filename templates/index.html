@@ -61,7 +61,7 @@
                     <p>12</p>
                     <button>Dislike</button>
                 </section>
-                <button class="reply-button">Reply</button>
+                <a href="{% url 'create_comment' discussion.id %}">Comment</a>
               </section>
               <section class="discussion-replies"></section>
             </section>

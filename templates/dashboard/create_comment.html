@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- create a form to create a discussion comment -->
+
+<form class="create-discussion-comment-form" action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Comment</button>
+</form>
+
+{% endblock content %}
