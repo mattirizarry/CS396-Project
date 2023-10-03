@@ -2,4 +2,38 @@
 
 {% block content %}
 
+{% if courses %}
+
+<section class="courses">
+{% for course in courses %}
+
+<section class="course">
+    <section class="course-image"></section>
+    <section class="course-meta">
+        <section class="course-details">
+            <h4>{{ course.name }}</h4>
+            <p>{{ course.instructor }}</p>
+        </section>
+        <a href="{% url 'view_course' course.id %}">View</a>
+    </section>
+</section>
+    
+    {% endfor %}
+</section>
+
+    {% else %}
+<section class="courses">
+    <section class="course">
+        <section class="course-image"></section>
+        <section class="course-meta">
+            <section class="course-details">
+                <h4>No Courses</h4>
+                <p>Enroll in a course to get started.</p>
+            </section>
+            <a href="#">View</a>
+        </section>
+    </section>
+</section>
+{% endif %}
+
 {% endblock content %}

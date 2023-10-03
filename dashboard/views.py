@@ -9,12 +9,58 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("login")
     
-    enrolled_courses = Course.objects.filter(students=request.user)
+    # instead of selected all enrolleed, select a max of 3
+    enrolled_courses = Course.objects.filter(students=request.user).order_by("-created_date")[:3]
 
-    # sorted by most recent
+
+    
     discussions = DiscussionPost.objects.all().order_by("-created_date")
 
     return render(request, "index.html", {"enrolled_courses": enrolled_courses, "discussions": discussions })
+
+def view_courses(request):
+    courses = Course.objects.all()
+
+    context = {
+        "courses": courses
+    }
+
+    return render(request, "courses.html", context)
+
+def view_course(request, course_id):
+    course = Course.objects.get(id=course_id)
+
+    context = {
+        "course": course
+    }
+
+    print (course)
+
+    return render(request, "course.html", context)
+
+def view_discussion(request, discussion_id):
+    discussion = DiscussionPost.objects.get(id=discussion_id)
+
+    if request.method == "POST":
+        form = CreateDiscussionPostForm(request.POST)
+
+        if form.is_valid():
+            user = request.user
+
+            created_post = form.save(commit=False)
+            created_post.user = user
+            created_post.save()
+
+            return redirect("index")
+        
+    form = CreateDiscussionPostForm()
+
+    context = {
+        "discussion": discussion,
+        "form": form
+    }
+
+    return render(request, "discussion.html", context) 
 
 def create_discussion_post(request):
     if request.method == "POST":
@@ -59,8 +105,6 @@ def create_comment(request, post_id):
     }
 
     return render(request, "dashboard/create_comment.html", context)
-
-
 
 def register(request):
     

@@ -5,7 +5,7 @@
       <section class="container">
         <section class="container-header">
           <h3>Your Courses</h3>
-          <a href="#">View All</a>
+          <a href="{% url 'view_courses' %}">View All</a>
         </section>
 
         <section class="container-body">
@@ -18,7 +18,7 @@
                   <h4>{{ course.name }}</h4>
                   <p>{{ course.instructor }}</p>
                 </section>
-                <a href="#">View</a>
+                <a href="{% url 'view_course' course.id %}">View</a>
               </section>
             </section>
             {% endfor %} {% else %}
@@ -61,7 +61,7 @@
                     <p>12</p>
                     <button>Dislike</button>
                 </section>
-                <a href="{% url 'create_comment' discussion.id %}">Comment</a>
+                <a href="{% url 'view_discussion' discussion.id %}">View & Comment</a>
               </section>
               <section class="discussion-replies"></section>
             </section>
