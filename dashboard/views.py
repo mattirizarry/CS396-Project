@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 
 from .forms import RegistrationForm, CreateDiscussionPostForm, CreateDiscussionCommentForm
-from .models import Course, DiscussionPost, DiscussionComment
+from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson
 
 def index(request):
     if not request.user.is_authenticated:
@@ -25,22 +25,20 @@ def view_courses(request):
 
 def view_course(request, course_id):
     course = Course.objects.get(id=course_id)
+    assignments = Assignment.objects.filter(course=course_id)
+    lessons = Lesson.objects.filter(course=course_id)
 
     context = {
-        "course": course
+        "course": course,
+        'assignments': assignments,
+        'lessons': lessons
     }
-
-    print (course)
 
     return render(request, "course.html", context)
 
 def view_discussion(request, discussion_id):
     discussion = DiscussionPost.objects.get(id=discussion_id)
-    # comments = DiscussionComment.objects.(post=discussion_id), copilot do it right for me
     comments = DiscussionComment.objects.filter(post=discussion_id)
-
-
-    print(comments)
 
     if request.method == "POST":
         form = CreateDiscussionCommentForm(request.POST)
@@ -88,14 +86,10 @@ def create_discussion_post(request):
 
 def create_comment(request, post_id):
 
-    print(post_id)
-
     if request.method == "POST":
 
         post = DiscussionPost.objects.get(id=post_id)
         form = CreateDiscussionCommentForm(request.POST)
-
-        print(post.comments.count)
 
         if form.is_valid():
             user = request.user

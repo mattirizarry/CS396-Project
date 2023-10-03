@@ -28,12 +28,12 @@ body {
     padding: 2rem;
 }
 
-.asm-two-column .main-column .container {
+.container {
     background: white;
     padding: 2rem;
 }
 
-.asm-two-column .main-column .container .container-header {
+.container .container-header {
     font-size: 3rem;
     font-weight: bolder;
     margin-bottom: 2rem;
@@ -41,7 +41,7 @@ body {
     grid-template-columns: 1fr 1fr;
 }
 
-.asm-two-column .main-column .container .container-header a, .asm-two-column .main-column .container .container-header button {
+.container .container-header a, .asm-two-column .main-column .container .container-header button {
     justify-self: end;
 }
 

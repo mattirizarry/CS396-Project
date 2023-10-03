@@ -16,16 +16,26 @@ class Course(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
     assignments = models.ManyToManyField('Assignment', related_name='courses', blank=True)
 
+class Lesson(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
 class Assignment(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    type = models.CharField(max_length=20)
     due_date = models.DateTimeField()
-    status = models.CharField(max_length=20)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    submissions = models.ManyToManyField('Submission', related_name='assignments')
+
+class MultipleChoiceQuestion(models.Model):
+    question = models.CharField(max_length=100)
+    choices = models.TextField()
+    answer = models.CharField(max_length=100)
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
 
 class Submission(models.Model):
     name = models.CharField(max_length=100)

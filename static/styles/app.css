@@ -1,6 +1,7 @@
 @import 'general.css';
 
 @import 'pages/index.css';
+@import 'pages/course.css';
 
 @import 'components/header.css';
 @import 'components/footer.css';

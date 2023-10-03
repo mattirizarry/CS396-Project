@@ -1,0 +1,16 @@
+.lessons {
+    background: khaki;
+}
+
+.assignments {
+    background: lightgreen;
+}
+
+.course-content .container-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.course-details {
+    background: lightblue;
+}
