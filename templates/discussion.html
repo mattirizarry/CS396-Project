@@ -6,59 +6,16 @@
 <p>{{discussion.description}}</p>
 
 <h2>Comments</h2>
-
-{% if comments %}
 {% for comment in comments %}
-
-<section class="comment">
-    <section class="author-details">
-        <section class="author-image"></section>
-        <h4>{{comment.user}}</h4>
-    </section>
-    <section class="comment-body">
-        <p>{{comment.body}}</p>
-    </section>
-</section>
-<section class="replies">
-    {% for reply in comment.replies.all %}
-    <section class="reply">
-        <section class="author-details">
-            <section class="author-image"></section>
-            <h4>{{reply.user}}</h4>
-        </section>
-        <section class="reply-body">
-            <p>{{reply.body}}</p>
-        </section>
-    </section>
-    {% endfor %}
-    {% if user.is_authenticated %}
-    <form class="create-reply-form" action="." method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create Reply</button>
-    </form>
-    {% else %}
-    <p>You must be logged in to reply.</p>
-    {% endif %}
-</section>
-
+    <h3>{{comment.user}}</h3>
+    <p>{{comment.body}}</p>
 {% endfor %}
-{% else %}
-<p>No comments yet.</p>
-{% endif %}
 
-{% if user.is_authenticated %}
-
-<form class="create-discussion-comment-form" action="." method="post">
+<form class="create-discussion-comment-form" action="{% url 'create_comment' post_id=discussion.id %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Comment</button>
 </form>
 
-{% else %}
-
-<p>You must be logged in to comment.</p>
-
-{% endif %}
 
 {% endblock content %}

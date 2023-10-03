@@ -42,11 +42,10 @@ class DiscussionPost(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    comments = models.ManyToManyField('DiscussionComment', related_name='posts', blank=True)
 
 class DiscussionComment(models.Model):
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    post = models.ForeignKey(DiscussionPost, on_delete=models.CASCADE)
+    post = models.ForeignKey(DiscussionPost, on_delete=models.CASCADE, related_name="comments")
