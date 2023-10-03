@@ -7,7 +7,7 @@ body {
     display: grid;
     /* create a grid with the top row being 14 rem, the bottom row being 46rem, and it should at least show what is left in the middle */
 
-    grid-template-rows: 14rem 1fr 18rem;
+    grid-template-rows: 40rem 1fr 18rem;
     min-height: 100svh;
 }
 
@@ -15,4 +15,32 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.asm-two-column {
+    display: grid;
+    grid-template-columns: 7fr 2fr;
+    background: red;
+}
+
+.asm-two-column .main-column {
+    background: orange;
+    padding: 2rem;
+}
+
+.asm-two-column .main-column .container {
+    background: white;
+    padding: 2rem;
+}
+
+.asm-two-column .main-column .container .container-header {
+    font-size: 3rem;
+    font-weight: bolder;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.asm-two-column .main-column .container .container-header a {
+    justify-self: end;
 }

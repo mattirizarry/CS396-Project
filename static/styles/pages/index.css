@@ -1,0 +1,81 @@
+.courses {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: lightcoral;
+}
+
+.courses .course {
+    background: lightblue;
+    position: relative;
+}
+
+.courses .course .course-image {
+    height: 28rem;
+    width: auto;
+    background: wheat;
+}
+
+.courses .course .course-meta {
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 8rem;
+    justify-content: space-between;
+}
+
+.courses .course .course-meta a {
+    justify-self: end;
+    align-self: center;
+}
+
+.discussions {
+    display: grid;
+    background: lightgreen;
+    row-gap: 2rem;
+}
+
+.discussions .discussion {
+    display: grid;
+    background: lightseagreen;
+    grid-template-columns: 20rem 1fr;
+}
+
+.discussions .discussion .author-details {
+    display: grid;
+    grid-template-rows: 20rem 3rem;
+    row-gap: 2rem;
+}
+
+.discussions .discussion .author-details .author-image {
+    height: 20rem;
+    width: 20rem;
+    background:blueviolet;
+    border-radius: 50%;
+}
+
+.discussions .discussion .author-details h4 {
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+.discussions .discussion .discussion-body {
+    background: lightyellow;
+    padding: 4rem;
+}
+
+.discussions .discussion .discussion-body h4 {
+    font-size: 2.8rem;
+    margin-bottom: 1.8rem;
+}
+
+.discussions .discussion .discussion-body p {
+    font-size: 1.8rem;
+}
+
+.asm-two-column .secondary-column {
+    background: pink;
+}
+
+

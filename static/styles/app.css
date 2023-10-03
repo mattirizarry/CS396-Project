@@ -1,4 +1,6 @@
 @import 'general.css';
 
-@import 'components/nav.css';
+@import 'pages/index.css';
+
+@import 'components/header.css';
 @import 'components/footer.css';

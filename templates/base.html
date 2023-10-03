@@ -7,13 +7,31 @@
         <link rel="stylesheet" href="{% static 'styles/app.css' %}">
     </head>
     <body>
-        <nav class="site-nav">
-            <section class="site-logo"></section>
-            <section class="site-links">
-
+        <header class="site-header">
+            <nav class="site-nav">
+                <section class="site-logo"></section>
+                <section class="site-links">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Grades</a></li>
+                    </ul>
+                </section>
+                <section class="hamburger">
+                    <section class="hamburger-lines">
+                        <div class="hamburger-line"></div>
+                        <div class="hamburger-line"></div>
+                        <div class="hamburger-line"></div>
+                    </section>
+                </section>
+            </nav>
+            <section class="jumbotron">
+                <section class="jumbotron-content">
+                    <h1>Hi {{ user.username }}!</h1>
+                    <p>Here are your courses and discussions.</p>
+                </section>
             </section>
-            <section class="hamburger"></section>
-        </nav>
+        </header>
         
         <section class="main">
             {% block content %}

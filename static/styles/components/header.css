@@ -1,0 +1,71 @@
+.site-header {
+    background: aqua;
+    display: grid;
+    grid-template-rows: 14rem 26rem;
+}
+
+.site-header .jumbotron {
+    padding: 2rem;
+    height: 26rem;
+}
+
+.site-nav {
+    display: grid;
+    
+    height: 14rem;
+    grid-template-columns: 14rem 1fr 14rem;
+}
+
+.site-nav .site-logo {
+    height: 10rem;
+    width: 10rem;
+    background: blue;
+    place-self: center;
+}
+
+.site-nav .site-links {
+    display: grid;
+    width: 100%;
+    height: 10rem;
+    align-self: center;
+    background: green;
+}
+
+.site-nav .site-links ul {
+    justify-self: end;
+    align-self: center;
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    margin-right: 4rem;
+}
+
+.site-nav .site-links ul li a {
+    text-decoration: none;
+    color: white;
+    margin-left: 4rem;
+    font-size: 2.8rem;
+    font-weight: bolder;
+}
+
+.site-nav .hamburger {
+    width: 10rem;
+    height: 10rem;
+    place-self: center;
+    background: yellow;
+    display: grid;
+}
+
+.site-nav .hamburger .hamburger-lines {
+    place-self: center;
+    display: grid;
+    grid-template-rows: 0.6rem 0.6rem 0.6rem;
+    row-gap: 1rem;
+}
+
+.site-nav .hamburger .hamburger-lines .hamburger-line {
+    width: 5.4rem;
+    height: 0.6rem;
+    background: white;
+    border-radius: 2rem;
+}
