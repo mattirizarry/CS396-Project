@@ -1,16 +1,67 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import login, authenticate
+
+from .forms import RegistrationForm, CreateDiscussionPostForm
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
 
-    print(request.user.is_authenticated)
+    return render(request, "index.html")
 
-    if request.user.is_authenticated:
-        return render(request, 'dashboard/index.html')
-    else:
-       return redirect('login') 
+def create_discussion_post(request):
+
+    print(request.user)
+
+    if request.method == "POST":
+        form = CreateDiscussionPostForm(request.POST)
+
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            content = form.cleaned_data.get("content")
+            
+            # the discussionpost model also belongs to the user model
+            # so we can get the user from the request
+            
+            user = request.user
+
+            created_post = form.save(commit=False)
+            created_post.user = user
+            created_post.save()
+
+            return redirect("index")
         
+    form = CreateDiscussionPostForm()
+    context = {
+        "form": form,
+    }
+
+    return render(request, "dashboard/create_discussion_post.html", context)
+
+def register(request):
     
-def login(request):
-    return render(request, "dashboard/login.html")
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password1")
+
+            form.save()
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("index")
+    
+    form = RegistrationForm()
+    context = {
+        "form": form,
+    }
+
+    return render(request, "registration/register.html", context)
+
+
     
