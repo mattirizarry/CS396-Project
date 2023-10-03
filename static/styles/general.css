@@ -1,0 +1,18 @@
+html, body {
+    font-size: 10px;
+    font-family:Arial, Helvetica, sans-serif
+}
+
+body {
+    display: grid;
+    /* create a grid with the top row being 14 rem, the bottom row being 46rem, and it should at least show what is left in the middle */
+
+    grid-template-rows: 14rem 1fr 18rem;
+    min-height: 100svh;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

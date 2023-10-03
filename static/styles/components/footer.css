@@ -1,0 +1,48 @@
+.site-footer {
+    display: grid;
+    width: 100%;
+    background: purple;
+    grid-template-columns: 46rem 1fr 12rem;
+    height: 18rem;
+}
+
+.site-footer .footer-logo {
+    height: 12rem;
+    width: 42rem;
+    background: aqua;
+    place-self: center;
+}
+
+.site-footer .footer-links {
+    display: grid;
+    grid-template-columns: 8rem;
+    grid-auto-rows: 2rem;
+    justify-self: end;
+    align-self: center;
+}
+
+.site-footer .footer-social {
+    display: grid;
+    grid-template-rows: 3rem 3rem 3rem;
+    place-items: center;
+    place-self: center;
+}
+
+.site-footer .footer-social a {
+    display: inline-block;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+}
+
+.site-footer .footer-social a:nth-child(2) {
+    background: blue;
+}
+
+.site-footer .footer-social a:nth-child(3) {
+    background: green;
+}
+
+.site-footer .footer-social a:nth-child(4) {
+    background: yellow;
+}

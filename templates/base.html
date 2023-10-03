@@ -1,16 +1,39 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    </head>
     <body>
-        <nav>
-            hello navigation bar
+        <nav class="site-nav">
+            <section class="site-logo"></section>
+            <section class="site-links">
+
+            </section>
+            <section class="hamburger"></section>
         </nav>
         
         <section class="main">
             {% block content %}
             {% endblock content %}
         </section>
-        <footer>
-            hello footer bar
+        <footer class="site-footer">
+            <section class="footer-logo"></section>
+            <section class="footer-links">
+                <h3>Sitemap</h3>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </section>
+            <section class="footer-social">
+                <h3>Social Links</h3>
+                <a href="#"></a>
+                <a href="#"></a>
+                <a href="#"></a>
+            </section>
         </footer>
     </body>
 </html>
