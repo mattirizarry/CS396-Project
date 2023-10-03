@@ -1,0 +1,31 @@
+.courses {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: lightcoral;
+}
+
+.courses .course {
+    background: lightblue;
+    position: relative;
+}
+
+.courses .course .course-image {
+    height: 28rem;
+    width: auto;
+    background: wheat;
+}
+
+.courses .course .course-meta {
+    position: absolute;
+    bottom: 0;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 8rem;
+    justify-content: space-between;
+}
+
+.courses .course .course-meta a {
+    justify-self: end;
+    align-self: center;
+}

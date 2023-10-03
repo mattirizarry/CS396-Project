@@ -7,6 +7,22 @@
 .site-header .jumbotron {
     padding: 2rem;
     height: 26rem;
+    display: grid;
+}
+
+.site-header .jumbotron .jumbotron-content {
+    align-self: end;
+}
+
+.site-header .jumbotron .jumbotron-content h1 {
+    font-size: 4.8rem;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+
+.site-header .jumbotron .jumbotron-content p {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
 }
 
 .site-nav {

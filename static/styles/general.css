@@ -44,3 +44,8 @@ body {
 .asm-two-column .main-column .container .container-header a {
     justify-self: end;
 }
+
+.asm-two-column .secondary-column {
+    background: yellow;
+    position: relative;
+}
