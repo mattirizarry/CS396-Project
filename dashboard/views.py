@@ -36,6 +36,16 @@ def view_course(request, course_id):
 
     return render(request, "course.html", context)
 
+def view_lesson(request, course_id, lesson_id):
+    
+    lesson = Lesson.objects.get(id=lesson_id, course_id=course_id)
+
+    context = {
+        "lesson": lesson
+    }
+
+    return render(request, "lesson.html", context)
+
 def view_discussion(request, discussion_id):
     discussion = DiscussionPost.objects.get(id=discussion_id)
     comments = DiscussionComment.objects.filter(post=discussion_id)

@@ -17,7 +17,7 @@
                             <section class="lesson">
                                 <h4>{{lesson.name}}</h4>
                                 <p>{{lesson.description}}</p>
-                                
+                                <a href="{% url 'view_lesson' lesson.id course.id %}">View Lesson</a>
                             </section>
                             {% endfor %}
                         </section>

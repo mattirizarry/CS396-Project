@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import AbstractUser
+from ckeditor.fields import RichTextField
 
 class Profile(AbstractUser):
     pass
@@ -19,6 +20,8 @@ class Course(models.Model):
 class Lesson(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    lessonBody = RichTextField(default='')
+    lessonFiles = models.FileField(upload_to='uploads/', null=True, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

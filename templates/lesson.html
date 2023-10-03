@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="main-content">
+    <section class="asm-two-column">
+        <section class="main-column">
+            {{lesson.lessonBody |safe}}
+        </section>
+        <aside class="secondary-column">
+            <h3>Files Shared By Professor</h3>
+            <section class="files">
+                {% if lesson.lessonFiles %}
+                    <div>
+                        <a href="{{ lesson.lessonFiles.url }}" download>{{ lesson.lessonFiles.name }}</a>
+                    </div>
+                {% else %}
+                    <p>No file shared by professor.</p>
+                {% endif %}
+            </section>
+        </aside>
+    </section>
+</main>
+
+{% endblock content %}

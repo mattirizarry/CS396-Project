@@ -9,5 +9,6 @@ urlpatterns = [
     path("posts/<int:post_id>/comment/", views.create_comment, name="create_comment"),
     path("courses/", views.view_courses, name="view_courses"),
     path("courses/<int:course_id>", views.view_course, name="view_course"),
+    path("courses/<int:course_id>/lessons/<int:lesson_id>", views.view_lesson, name="view_lesson"),
     path("discussions/<int:discussion_id>", views.view_discussion, name="view_discussion"),
 ]
