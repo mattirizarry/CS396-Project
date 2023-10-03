@@ -1,115 +1,91 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <main class="main-body">
-    <section class="asm-two-column">
-        <section class="main-column">
-            <section class="container">
-                <section class="container-header">
-                    <h3>Your Courses</h3>
-                    <a href="#">View All</a>
-                </section>
-    
-                <section class="container-body">
-                    <section class="courses">
-                        {% if enrolled_courses %}
-                        {% for course in enrolled_courses %}
-                        <section class="course">
-                            <section class="course-image">
-    
-                            </section>
-                            <section class="course-meta">
-                                <section class="course-details">
-                                    <h4>{{ course.name }}</h4>
-                                    <p>{{ course.instructor }}</p>
-                                </section>
-                                <a href="#">View</a>
-                            </section>
-                        </section>
-                        {% endfor %}
-                        {% else %}
-                        <section class="course">
-                            <section class="course-image">
-    
-                            </section>
-                            <section class="course-meta">
-                                <section class="course-details">
-                                    <h4>No Courses</h4>
-                                    <p>Enroll in a course to get started.</p>
-                                </section>
-                                <a href="#">View</a>
-                            </section>
-                        </section>   
-                        {% endif %}
-                    </section>
-                </section>
-            </section>
-            <section class="container">
-                <section class="container-header">
-                    <h3>Discussion</h3>
-                    <a href="{% url 'create_discussion_post' %}">Create</a>
-                </section>
-    
-                <section class="container-body">
-                    <section class="discussions">
-
-                        <!-- create a loop to display all discussion posts -->
-                        {% for discussion in discussions %}
-                        
-                    
-
-
-
-
-
-
-                        <section class="discussion">
-                            <section class="author-details">
-                                <section class="author-image">
-
-                                </section>
-                                <h4>{{discussion.user}}</h4>
-                            </section>
-                            <section class="discussion-body">
-                                <h4>{{discussion.title}}</h4>
-                                <p>{{discussion.description}}</p>
-                            </section>
-                            <section class="discussion-replies">
-
-                            </section>
-                        </section>
-                        {% endfor %}
-                    </section>
-                </section>
-            </section>
+  <section class="asm-two-column">
+    <section class="main-column">
+      <section class="container">
+        <section class="container-header">
+          <h3>Your Courses</h3>
+          <a href="#">View All</a>
         </section>
-        <aside class="secondary-column">
-            <section class="user-image">
 
-            </section>
-            <section class="user-profile">
-                <section class="user-details">
-                    <h3>{{ user.username }}</h3>
-                    <p>{{ user.email }}</p>
+        <section class="container-body">
+          <section class="courses">
+            {% if enrolled_courses %} {% for course in enrolled_courses %}
+            <section class="course">
+              <section class="course-image"></section>
+              <section class="course-meta">
+                <section class="course-details">
+                  <h4>{{ course.name }}</h4>
+                  <p>{{ course.instructor }}</p>
                 </section>
+                <a href="#">View</a>
+              </section>
             </section>
-            <nav class="secondary-nav">
-                <ul>
-                    <!--    create a logout link below -->
+            {% endfor %} {% else %}
+            <section class="course">
+              <section class="course-image"></section>
+              <section class="course-meta">
+                <section class="course-details">
+                  <h4>No Courses</h4>
+                  <p>Enroll in a course to get started.</p>
+                </section>
+                <a href="#">View</a>
+              </section>
+            </section>
+            {% endif %}
+          </section>
+        </section>
+      </section>
+      <section class="container">
+        <section class="container-header">
+          <h3>Discussion</h3>
+          <a href="{% url 'create_discussion_post' %}">Create</a>
+        </section>
 
+        <section class="container-body">
+          <section class="discussions">
+            {% for discussion in discussions %}
 
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-
-                    <!-- createa a link to reset password-->
-
-                    <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
-
-                    
-                </ul>
-            </nav>
-        </aside>
+            <section class="discussion">
+              <section class="author-details">
+                <section class="author-image"></section>
+                <h4>{{discussion.user}}</h4>
+              </section>
+              <section class="discussion-body">
+                <h4>{{discussion.title}}</h4>
+                <p>{{discussion.description}}</p>
+              </section>
+              <section class="discussion-buttons">
+                <section class="ratio">
+                    <button>Like</button>
+                    <p>12</p>
+                    <button>Dislike</button>
+                </section>
+                <button class="reply-button">Reply</button>
+              </section>
+              <section class="discussion-replies"></section>
+            </section>
+            {% endfor %}
+          </section>
+        </section>
+      </section>
     </section>
-
+    <aside class="secondary-column">
+      <section class="user-image"></section>
+      <section class="user-profile">
+        <section class="user-details">
+          <h3>{{ user.username }}</h3>
+          <p>{{ user.email }}</p>
+        </section>
+      </section>
+      <nav class="secondary-nav">
+        <ul>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+          <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
+        </ul>
+      </nav>
+    </aside>
+  </section>
 </main>
 
 {% endblock content %}

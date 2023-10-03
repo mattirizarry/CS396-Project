@@ -4,9 +4,9 @@
     background: blueviolet;
     border-radius: 50%;
     position: absolute;
-    top: -25%;
+    top: -19rem;
     left: 50%;
-    transform: translate(-50%, 25%);
+    transform: translateX(-50%);
 }
 
 .secondary-column .user-profile {

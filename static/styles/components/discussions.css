@@ -14,6 +14,7 @@
     display: grid;
     grid-template-rows: 20rem 3rem;
     row-gap: 2rem;
+    grid-row: 1/3;
 }
 
 .discussions .discussion .author-details .author-image {
@@ -40,4 +41,26 @@
 
 .discussions .discussion .discussion-body p {
     font-size: 1.8rem;
+}
+
+.discussions .discussion .discussion-buttons {
+    display: grid;
+    grid-template-columns: 12rem 10rem;
+    justify-content: space-between;
+    align-items: center;
+    background: lightblue;
+    padding: 2rem;
+}
+
+.discussion .discussion .discussion-buttons .reply-button {
+    justify-self: end;
+}
+
+.discussions .discussion .discussion-buttons .ratio {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.discussions .discussion .discussion-buttons .ratio p {
+    place-self: center;
 }
