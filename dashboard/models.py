@@ -48,6 +48,7 @@ class Submission(models.Model):
     earned = models.IntegerField(default=0)
     possible = models.IntegerField(default=0)
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
 
 class DiscussionPost(models.Model):

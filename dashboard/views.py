@@ -69,6 +69,7 @@ def view_lesson(request, course_id, lesson_id):
 def view_assignment(request, course_id, assignment_id):
 
     assignment = Assignment.objects.get(id=assignment_id, course_id=course_id)
+    course = Course.objects.get(id=course_id)
     questions = MultipleChoiceQuestion.objects.filter(assignment=assignment_id)
 
     if (request.method == "POST"):
@@ -82,7 +83,7 @@ def view_assignment(request, course_id, assignment_id):
                 earned += question.points
 
         # create a new submission object and save it to the database
-        submission = Submission(earned=earned, possible=possible, assignment=assignment, user=request.user)
+        submission = Submission(earned=earned, possible=possible, assignment=assignment, user=request.user, course=course)
         submission.save()
 
         # return to the course page
@@ -200,3 +201,70 @@ def register(request):
     }
 
     return render(request, "registration/register.html", context)
+
+# ===========================================
+# GET          /report
+# ===========================================
+
+def report(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    courses = Course.objects.filter(students=request.user)
+    assignments = Assignment.objects.filter(course__in=courses)
+    submissions = Submission.objects.filter(user=request.user)
+
+    # create a dictionary following this style dict[coursename][assignmentname] = [submissions]
+
+    submission_dict = {}
+
+    for course in courses:
+        course_assignments = assignments.filter(course=course)
+        course_submissions = submissions.filter(assignment__in=course_assignments)
+
+        assignment_dict = {}
+
+        for assignment in course_assignments:
+            assignment_submissions = course_submissions.filter(assignment=assignment)
+            assignment_dict[assignment.name] = list(assignment_submissions)
+
+        submission_dict[course.name] = assignment_dict
+
+    context = {
+        'submission_dict': submission_dict
+    }
+
+    print(submission_dict)
+
+    return render(request, "report.html", context)
+
+# ===========================================
+# GET          /<int:user.id>/report
+# ===========================================
+
+def user_report(request, user_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    courses = Course.objects.filter(students=user_id)
+
+    # iterate through each course
+    for course in courses:
+        # get all of the assignments for the course
+        assignments = Assignment.objects.filter(course=course.id)
+
+        
+        
+
+
+    submissions = Submission.objects.filter(user=user_id)
+
+    context = {
+        "courses": courses,
+        "submissions": submissions
+    }
+
+    print(courses)
+    print(submissions)
+    print(assignments)
+    return render(request, "report.html", context)
