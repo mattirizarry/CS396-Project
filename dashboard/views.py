@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 
 from .forms import RegistrationForm, CreateDiscussionPostForm, CreateDiscussionCommentForm
-from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson, MultipleChoiceQuestion, Submission
+from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson, MultipleChoiceQuestion, Submission, Profile
 
 # ===========================================
 #             /
@@ -13,17 +13,75 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect("login")
     
-    enrolled_courses = Course.objects.filter(students=request.user).order_by("-created_date")[:3]    
+    enrolled_courses = Course.objects.filter(students=request.user)
+    instructor_courses = Course.objects.filter(instructor=request.user)
+
+    courses = enrolled_courses.union(instructor_courses).order_by('-created_date')[:3]
+
     discussions = DiscussionPost.objects.all().order_by("-created_date")
 
-    return render(request, "index.html", {"enrolled_courses": enrolled_courses, "discussions": discussions })
+    context = {
+        "courses": courses,
+        "discussions": discussions
+    }
+
+    return render(request, "index.html", context)
+
+# ===========================================
+#             /teacher-report
+# ===========================================
+
+def teacher_report(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    courses = Course.objects.filter(instructor=request.user)
+    assignments = Assignment.objects.filter(course__in=courses)
+    submissions = Submission.objects.filter(course__in=courses)
+    students = Profile.objects.filter(courses__in=courses)
+
+    # create a dictionary following this style dict[coursename][assignmentname] = [submissions]
+
+    submission_dict = {}
+
+    for course in courses:
+        course_assignments = assignments.filter(course=course)
+        course_submissions = submissions.filter(course=course)
+
+        assignment_dict = {}
+
+        for assignment in course_assignments:
+
+            student_dict = {}
+
+            for student in students:
+                student_submissions = course_submissions.filter(user=student)
+                max_submission = student_submissions.order_by('-earned').first()
+                
+                student_dict[student.username] = max_submission
+            
+            assignment_dict[assignment.name] = student_dict        
+
+        submission_dict[course.name] = assignment_dict
+
+    context = {
+        'submission_dict': submission_dict
+    }
+
+    print(submission_dict)
+
+    return render(request, "teacher-report.html", context)
 
 # ===========================================
 #             /courses
 # ===========================================
 
 def view_courses(request):
-    courses = Course.objects.all()
+    # update this to only show courses that the user is enrolled in OR the user is the instructor in
+    enrolled_courses = Course.objects.filter(students=request.user)
+    instructor_courses = Course.objects.filter(instructor=request.user)
+
+    courses = enrolled_courses.union(instructor_courses)
 
     context = {
         "courses": courses
@@ -234,37 +292,4 @@ def report(request):
         'submission_dict': submission_dict
     }
 
-    print(submission_dict)
-
-    return render(request, "report.html", context)
-
-# ===========================================
-# GET          /<int:user.id>/report
-# ===========================================
-
-def user_report(request, user_id):
-    if not request.user.is_authenticated:
-        return redirect("login")
-
-    courses = Course.objects.filter(students=user_id)
-
-    # iterate through each course
-    for course in courses:
-        # get all of the assignments for the course
-        assignments = Assignment.objects.filter(course=course.id)
-
-        
-        
-
-
-    submissions = Submission.objects.filter(user=user_id)
-
-    context = {
-        "courses": courses,
-        "submissions": submissions
-    }
-
-    print(courses)
-    print(submissions)
-    print(assignments)
     return render(request, "report.html", context)

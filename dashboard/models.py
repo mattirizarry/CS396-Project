@@ -3,7 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 
 class Profile(AbstractUser):
-    pass
+    role = models.PositiveSmallIntegerField(default=0)
+    
 
 class Course(models.Model):
     code = models.CharField(max_length=10)

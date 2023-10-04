@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main class="main-content">
+    <section class="asm-two-column">
+        <section class="main-column">
+            <h3>Class Reports</h3>
+            {% for course_name, assignments in submission_dict.items %}
+            <section class="container">
+                <section class="container-header">
+                    <h3>{{ course_name }}</h3>
+                </section>
+                <section class="container-body">
+                    <sections class="assignments">
+                        {% for assignment_name, students in assignments.items %}
+                            <section class="assignment">
+                                <h4>{{ assignment_name }}</h4>
+                                <section class="students">
+                                    {% for student_name, submissions in students.items %}
+                                        <section class="student">
+                                            <h5>{{student_name}}</h5>
+                                            {% if submissions %}
+                                                <strong>{{ submissions.earned }}</strong>
+                                            {% else %}
+                                                <p>No submissions for this assignment</p>
+                                            {% endif %} 
+                                        </section>
+                                    {% endfor %}
+                                </section>
+                            </section>
+                        {% endfor %}
+                    </sections>
+                </section>
+            </section>
+            {% endfor %}
+        </section>
+        <aside class="secondary-column">
+
+        </aside>
+    </section>
+</main>
+
+{% endblock content %}

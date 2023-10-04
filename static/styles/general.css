@@ -1,6 +1,12 @@
 html, body {
     font-size: 10px;
-    font-family:Arial, Helvetica, sans-serif
+    font-family:Arial, Helvetica, sans-serif;
+    
+    --text: #f0f0f0;
+    --background: #212121;
+    --primary: #991a20;
+    --secondary: #cccccc;
+    --accent: #ae1e22;
 }
 
 body {
@@ -49,3 +55,4 @@ body {
     background: yellow;
     position: relative;
 }
+

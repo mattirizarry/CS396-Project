@@ -10,7 +10,7 @@
 
         <section class="container-body">
           <section class="courses">
-            {% if enrolled_courses %} {% for course in enrolled_courses %}
+            {% if courses %} {% for course in courses %}
             <section class="course">
               <section class="course-image"></section>
               <section class="course-meta">
@@ -79,7 +79,16 @@
       </section>
       <nav class="secondary-nav">
         <ul>
+          {% if user.is_staff %}
+
+          <li><a href="{% url 'teacher_report' %}">Class Report</a></li>
+          
+          {% else %}
+
           <li><a href="{% url 'report' %}">Grade Report</a></li>
+
+          {% endif %}
+
           <li><a href="{% url 'logout' %}">Logout</a></li>
           <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
         </ul>
