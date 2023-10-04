@@ -1,11 +1,13 @@
-{% extends 'base.html' %} {% block content %}
-<main class="main-body">
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %}
   <section class="asm-two-column">
     <section class="main-column">
       <section class="container">
         <section class="container-header">
           <h3>Your Courses</h3>
-          <a href="{% url 'view_courses' %}">View All</a>
+          <a class="btn accent" href="{% url 'view_courses' %}">View All</a>
         </section>
 
         <section class="container-body">
@@ -15,10 +17,10 @@
               <section class="course-image"></section>
               <section class="course-meta">
                 <section class="course-details">
-                  <h4>{{ course.name }}</h4>
-                  <p>{{ course.instructor }}</p>
+                  <h4>{{course.code}}</h4>
+                  <em> {{ course.name }}</em>
                 </section>
-                <a href="{% url 'view_course' course.id %}">View</a>
+                <a class="btn" href="{% url 'view_course' course.id %}">View</a>
               </section>
             </section>
             {% endfor %} {% else %}
@@ -39,7 +41,7 @@
       <section class="container">
         <section class="container-header">
           <h3>Discussions ({{discussions.count}})</h3>
-          <a href="{% url 'create_discussion_post' %}">Create</a>
+          <a class="btn accent" href="{% url 'create_discussion_post' %}">Create Discussion</a>
         </section>
 
         <section class="container-body">
@@ -57,11 +59,16 @@
               </section>
               <section class="discussion-buttons">
                 <section class="ratio">
-                    <button>Like</button>
-                    <p>12</p>
-                    <button>Dislike</button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                      <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                  </svg>
+                  <p>12</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                      <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                  </svg>
                 </section>
-                <a href="{% url 'view_discussion' discussion.id %}">View & Comment</a>
+              
+                <a class="btn accent" href="{% url 'view_discussion' discussion.id %}">View & Comment</a>
               </section>
             </section>
             {% endfor %}
@@ -95,6 +102,5 @@
       </nav>
     </aside>
   </section>
-</main>
 
 {% endblock content %}

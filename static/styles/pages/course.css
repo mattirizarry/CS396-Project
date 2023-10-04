@@ -1,16 +1,66 @@
-.lessons {
-    background: khaki;
-}
-
-.assignments {
-    background: lightgreen;
-}
-
-.course-content .container-body {
+.container-body.half {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
 }
 
-.course-details {
-    background: lightblue;
+.container-body.half .half-column h4 {
+    font-size: 2.4rem;
+    font-weight: bolder;
+    margin-bottom: 1.8rem;
+}
+
+.container-body.half .half-column > section > section {
+    background: var(--tertiary);
+    display: grid;
+    grid-template-columns: 1fr 18rem;
+    padding: 2.2rem 2rem;
+}
+
+.container-body.half .half-column section section:nth-child(2n) {
+    background: var(--quint);
+}
+
+
+.container-body.half .half-column .lessons, .container-body.half .half-column .assignments {
+    display: grid;
+}
+
+
+.container-body.half .half-column section section .assignment-details {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+}
+
+.container-body.half .half-column section section .assignment-details strong {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    align-self: center;
+    color: var(--accent);
+    font-style: italic;
+}
+
+.container-body.half .half-column section h5 {
+    font-size: 1.6rem;
+    font-weight: bolder;
+    align-self: center;
+}
+
+.container.sidebar {
+    padding: 0;
+}
+
+.container.sidebar .container-header {
+    padding: 2rem 2rem 1rem;
+}
+
+.container.sidebar .container-body .course-details {
+    display: grid;
+    row-gap: 0.2rem;
+    font-size: 1.6rem;
+}
+
+.container.sidebar .container-body .course-details p {
+    padding: 1rem 0.8rem;
+    background: var(--quad);
 }

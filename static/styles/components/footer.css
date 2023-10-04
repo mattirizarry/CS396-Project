@@ -1,15 +1,14 @@
 .site-footer {
     display: grid;
     width: 100%;
-    background: purple;
-    grid-template-columns: 46rem 1fr 12rem;
+    background: #191919;
+    grid-template-columns: 32rem 1fr 12rem;
     height: 18rem;
 }
 
 .site-footer .footer-logo {
-    height: 12rem;
-    width: 42rem;
-    background: aqua;
+    max-height: 8rem;
+    width: auto;
     place-self: center;
 }
 

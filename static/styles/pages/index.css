@@ -1,10 +1,14 @@
+.secondary-column {
+    color: var(--text);
+}
+
 .secondary-column .user-image {
-    height: 35rem;
-    width: 35rem;
-    background: blueviolet;
+    height: 30rem;
+    width: 30rem;
+    background: var(--quad);
     border-radius: 50%;
     position: absolute;
-    top: -19rem;
+    top: -15rem;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -13,6 +17,7 @@
     display: grid;
     grid-template-rows: 10rem 1fr;
     margin-top: 16rem;
+    margin-bottom: 4rem;
     text-align: center;
 }
 
@@ -30,17 +35,12 @@
     font-size: 1.8rem;
 }
 
-.secondary-column .secondary-nav {
-    background: blue;
-}
-
 .secondary-column .secondary-nav ul {
     display: grid;
     list-style: none;
     align-items: center;
     font-size: 2rem;
-    background: lightgoldenrodyellow;
-    row-gap: 0.1rem;
+    row-gap: 0.2rem;
     
 }
 
@@ -48,6 +48,11 @@
     text-decoration: none;
     color: white;
     font-weight: bolder;
-    background: gray;
-    padding: 2rem 1rem;
+    background: var(--quad);
+    padding: 1rem 3rem;
+}
+
+.secondary-column .secondary-nav ul li a {
+    text-decoration: none;
+    color: var(--text);
 }

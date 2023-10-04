@@ -1,27 +1,28 @@
 .discussions {
     display: grid;
-    background: lightgreen;
     row-gap: 2rem;
 }
 
  .discussion {
     display: grid;
-    background: lightseagreen;
+    background: var(--tertiary);
     grid-template-columns: 20rem 1fr;
+    grid-template-rows: 1fr 6rem;
+    box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.75);
 }
 
  .discussion .author-details {
     display: grid;
-    grid-template-rows: 20rem 3rem;
-    row-gap: 2rem;
+    grid-template-rows: 20rem 4rem;
     grid-row: 1/3;
 }
 
  .discussion .author-details .author-image {
-    height: 20rem;
-    width: 20rem;
-    background:blueviolet;
+    height: 16rem;
+    width: 16rem;
+    background:var(--quad);
     border-radius: 50%;
+    place-self: center;
 }
 
  .discussion .author-details h4 {
@@ -30,7 +31,7 @@
 }
 
  .discussion .discussion-body {
-    background: lightyellow;
+    background-color: var(--quad);
     padding: 4rem;
 }
 
@@ -45,11 +46,10 @@
 
  .discussion .discussion-buttons {
     display: grid;
-    grid-template-columns: 12rem 10rem;
+    grid-template-columns: 12rem 18rem;
     justify-content: space-between;
     align-items: center;
-    background: lightblue;
-    padding: 2rem;
+    padding: 0 1rem;
 }
 
 .discussion .discussion-buttons .reply-button {
@@ -61,38 +61,55 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
- .discussion .discussion-buttons .ratio p {
+.discussion .discussion-buttons svg {
+    height: 3rem;
+    width: 3rem;
     place-self: center;
+    fill: var(--accent);
+    cursor: pointer;
+}
+
+.discussion .discussion-buttons svg:nth-child(1) {
+    transform: rotate(180deg);
+}
+
+.discussion .discussion-buttons .ratio p {
+    place-self: center;
+    color: var(--text);
+    font-size: 1.4rem;
+    font-weight: bolder;
 }
 
 .discussion .replies {
     display: grid;
     grid-column: 2/3;
-    background: orange;
-    row-gap: 0.4rem;
+    row-gap: 0.2rem;
+    background: var(--tertiary);
 }
 
 .discussion .replies .reply {
     display: grid;
     grid-template-columns: 10rem 1fr;
-    background: lightcoral;
+    background: var(--background);
 }
 
 .discussion .replies .reply .reply-author {
-    background: lightcyan;
-    padding: 2rem;
+    font-size: 1rem;
+    place-self: center;
+    display: grid;
+    padding: 1rem;
 }
 
 .discussion .replies .reply .reply-author .author-image {
     height: 6rem;
     width: 6rem;
     border-radius: 50%;
-    background: blueviolet;
+    background: var(--accent);
+    place-self: center;
     margin-bottom: 1rem;
 }
 
 .discussion .replies .reply .reply-content {
-    background: lightgoldenrodyellow;
     padding: 2rem;
     font-size: 1.8rem;
 }

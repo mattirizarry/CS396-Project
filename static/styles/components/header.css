@@ -1,41 +1,41 @@
 .site-header {
-    background: aqua;
+    background: var(--accent);
     display: grid;
     grid-template-rows: 14rem 26rem;
 }
 
 .site-header .jumbotron {
-    padding: 2rem;
+    padding: 2rem 4rem;
     height: 26rem;
     display: grid;
 }
 
 .site-header .jumbotron .jumbotron-content {
     align-self: end;
+    color: var(--text);
 }
 
 .site-header .jumbotron .jumbotron-content h1 {
     font-size: 4.8rem;
     font-weight: bolder;
     text-transform: capitalize;
+    text-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
 .site-header .jumbotron .jumbotron-content p {
     font-size: 2.8rem;
-    margin-bottom: 2rem;
+    text-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
 .site-nav {
     display: grid;
     
     height: 14rem;
-    grid-template-columns: 14rem 1fr 14rem;
+    grid-template-columns: 20rem 1fr 14rem;
 }
 
 .site-nav .site-logo {
     height: 10rem;
-    width: 10rem;
-    background: blue;
     place-self: center;
 }
 
@@ -44,7 +44,6 @@
     width: 100%;
     height: 10rem;
     align-self: center;
-    background: green;
 }
 
 .site-nav .site-links ul {
@@ -62,14 +61,15 @@
     margin-left: 4rem;
     font-size: 2.8rem;
     font-weight: bolder;
+    text-transform: uppercase;
 }
 
 .site-nav .hamburger {
     width: 10rem;
     height: 10rem;
     place-self: center;
-    background: yellow;
     display: grid;
+    cursor: pointer;
 }
 
 .site-nav .hamburger .hamburger-lines {
@@ -83,5 +83,4 @@
     width: 5.4rem;
     height: 0.6rem;
     background: white;
-    border-radius: 2rem;
 }

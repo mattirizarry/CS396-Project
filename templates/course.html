@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<main>
+
     <section class="asm-two-column">
         <section class="main-column">
             <section class="course-content">
@@ -10,52 +10,59 @@
                     <section class="container-header">
                         <h3>{{course.code}} - {{course.name}}</h3>
                     </section>
-                    <section class="container-body">
+                    <section class="container-body half">
                         {% if lessons %}
-                        <section class="lessons">
-                            {% for lesson in lessons %}
-                            <section class="lesson">
-                                <h4>{{lesson.name}}</h4>
-                                <p>{{lesson.description}}</p>
-                                <a href="{% url 'view_lesson' lesson.id course.id %}">View Lesson</a>
+                        <section class="half-column">
+                            <h4>Lessons</h4>
+                            <section class="lessons">
+                                {% for lesson in lessons %}
+                                <section class="lesson">
+                                    <h5>{{lesson.name}}</h5>
+                                    <a class="btn" href="{% url 'view_lesson' course.id lesson.id %}">View Lesson</a>
+                                </section>
+                                {% endfor %}
                             </section>
-                            {% endfor %}
                         </section>
                         {% endif %}
                         {% if assignments %}
-                        <section class="assignments">
-                            {% for assignment in assignments %}
-                            <section class="assignment">
-                                <h4>{{assignment.name}}</h4>
-                                <p>{{assignment.description}}</p>
-                                <strong>Due Date: {{assignment.due_date}}</strong>
-                                <a href="{% url 'view_assignment' assignment.id course.id %}">View Assignment</a>
+                        <section class="half-column">
+                            <h4>Assignments</h4>
+                            <section class="assignments">
+                                {% for assignment in assignments %}
+                                <section class="assignment">
+                                    <section class="assignment-details">
+                                        <h5>{{assignment.name}}</h5>
+                                        <strong>Due Date: {{assignment.due_date}}</strong>
+                                    </section>
+                                    <a class="btn" href="{% url 'view_assignment' course.id assignment.id %}">View Assignment</a>
+                                </section>
+                                {% endfor %}
                             </section>
-                            {% endfor %}
                         </section>
                         {% endif %}
                     </section>
                 </section>
             </section>
         </section>
-        <aside>
+        <aside class="secondary-column">
             <section class="course-details">
-                <section class="container">
+                <section class="container sidebar">
                     <section class="container-header">
                         <h3>Course Details</h3>
                     </section>
                     <section class="container-body">
-                        <p><strong>Course Code:</strong> {{course.code}}</p>
-                        <p><strong>Course Name:</strong> {{course.name}}</p>
-                        <p><strong>Course Description:</strong> {{course.description}}</p>
-                        <p><strong>Course Instructor:</strong> {{course.instructor}}</p>
-                        <p><strong>Course Start Date:</strong> {{course.start_date}}</p>
-                        <p><strong>Course End Date:</strong> {{course.end_date}}</p>
+                        <section class="course-details">
+                            <p><strong>Course Code:</strong> {{course.code}}</p>
+                            <p><strong>Course Name:</strong> {{course.name}}</p>
+                            <p><strong>Course Description:</strong> {{course.description}}</p>
+                            <p><strong>Course Instructor:</strong> {{course.instructor}}</p>
+                            <p><strong>Course Start Date:</strong> {{course.start_date}}</p>
+                            <p><strong>Course End Date:</strong> {{course.end_date}}</p>
+                        </section>
                     </section>
                 </section>
             </section>
         </aside>
     </section>
-</main>
 
 {% endblock content %}

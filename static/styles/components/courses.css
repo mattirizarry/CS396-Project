@@ -2,18 +2,22 @@
     display: grid;
     grid-gap: 2rem;
     grid-template-columns: 1fr 1fr 1fr;
-    background: lightcoral;
 }
 
 .courses .course {
-    background: lightblue;
     position: relative;
+    transition: 200ms ease-in-out;
+}
+
+.courses .course:hover {
+    transform: scale(1.025);
+    box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.75);
 }
 
 .courses .course .course-image {
     height: 28rem;
     width: auto;
-    background: wheat;
+    background: var(--tertiary);
 }
 
 .courses .course .course-meta {
@@ -23,30 +27,21 @@
     width: 100%;
     grid-template-columns: 1fr 8rem;
     justify-content: space-between;
+    background: var(--accent);
+    padding: 2rem 1rem;
 }
 
 .courses .course .course-meta .course-details h4 {
     margin: 0;
     padding: 0;
     font-size: 1.8rem;
-    font-weight: 400;
+    font-weight: bolder;
 }
 
-.courses .course .course-meta .course-details p {
+.courses .course .course-meta .course-details em {
     margin: 0;
     padding: 0;
-    font-size: 1.4rem;
-    font-weight: 300;
-}
-
-.courses .course .course-meta a {
-    justify-self: end;
-    align-self: center;
-    text-decoration: none;
-    color: #fff;
-    background: #000;
-    padding: 1rem 2rem;
-    border-radius: 2rem;
-    font-size: 1.4rem;
-    font-weight: 300;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
 }

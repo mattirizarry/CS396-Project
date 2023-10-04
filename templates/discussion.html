@@ -2,7 +2,6 @@
 
 {% block content %}
 
-<main class="main-body">
     <section class="asm-two-column">
         <section class="main-column">
             <section class="container">
@@ -18,11 +17,15 @@
                         </section>
                         <section class="discussion-buttons">
                             <section class="ratio">
-                                <button>Like</button>
-                                <p>12</p>
-                                <button>Dislike</button>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                              </svg>
+                              <p>12</p>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                                  <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                              </svg>
                             </section>
-                        </section>
+                          </section>
                         <section class="replies">
                             {% for comment in comments %}
                             <section class="reply">
@@ -50,6 +53,5 @@
             </form>
         </aside>
     </section>
-</main>
 
 {% endblock content %}
