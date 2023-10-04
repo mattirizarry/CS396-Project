@@ -3,7 +3,11 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 
 from .forms import RegistrationForm, CreateDiscussionPostForm, CreateDiscussionCommentForm
-from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson
+from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson, MultipleChoiceQuestion, Submission
+
+# ===========================================
+#             /
+# ===========================================
 
 def index(request):
     if not request.user.is_authenticated:
@@ -14,6 +18,10 @@ def index(request):
 
     return render(request, "index.html", {"enrolled_courses": enrolled_courses, "discussions": discussions })
 
+# ===========================================
+#             /courses
+# ===========================================
+
 def view_courses(request):
     courses = Course.objects.all()
 
@@ -22,6 +30,10 @@ def view_courses(request):
     }
 
     return render(request, "courses.html", context)
+
+# ===========================================
+#             /courses/<int:course_id>
+# ===========================================
 
 def view_course(request, course_id):
     course = Course.objects.get(id=course_id)
@@ -36,6 +48,10 @@ def view_course(request, course_id):
 
     return render(request, "course.html", context)
 
+# ===========================================
+#            /courses/<int:course_id>/lessons/<int:lesson_id>
+# ===========================================
+
 def view_lesson(request, course_id, lesson_id):
     
     lesson = Lesson.objects.get(id=lesson_id, course_id=course_id)
@@ -45,6 +61,43 @@ def view_lesson(request, course_id, lesson_id):
     }
 
     return render(request, "lesson.html", context)
+
+# ===========================================
+#             /courses/<int:course_id>/assignments/<int:assignment_id>
+# ===========================================
+
+def view_assignment(request, course_id, assignment_id):
+
+    assignment = Assignment.objects.get(id=assignment_id, course_id=course_id)
+    questions = MultipleChoiceQuestion.objects.filter(assignment=assignment_id)
+
+    if (request.method == "POST"):
+        earned = 0
+        possible = 0
+
+        for question in questions:
+            possible += question.points
+
+            if (question.answer == request.POST.get(question.question)):
+                earned += question.points
+
+        # create a new submission object and save it to the database
+        submission = Submission(earned=earned, possible=possible, assignment=assignment, user=request.user)
+        submission.save()
+
+        # return to the course page
+        return redirect("view_course", course_id)
+
+    context = {
+        "assignment": assignment,
+        "questions": questions
+    }
+
+    return render(request, "assignment.html", context)
+
+# ===========================================
+#           /discussions/<int:discussion_id>
+# ===========================================
 
 def view_discussion(request, discussion_id):
     discussion = DiscussionPost.objects.get(id=discussion_id)
@@ -74,6 +127,10 @@ def view_discussion(request, discussion_id):
 
     return render(request, "discussion.html", context) 
 
+# ===========================================
+# GET          /discussions/create
+# ===========================================
+
 def create_discussion_post(request):
     if request.method == "POST":
         form = CreateDiscussionPostForm(request.POST)
@@ -94,6 +151,10 @@ def create_discussion_post(request):
 
     return render(request, "dashboard/create_discussion_post.html", context)
 
+# ===========================================
+# POST          /discussions/create 
+# ===========================================
+
 def create_comment(request, post_id):
 
     if request.method == "POST":
@@ -112,6 +173,9 @@ def create_comment(request, post_id):
             # refresh the page
             return redirect("view_discussion", post_id)
             
+# ===========================================
+# GET          /accounts/register
+# ===========================================
 
 def register(request):
     
@@ -136,6 +200,3 @@ def register(request):
     }
 
     return render(request, "registration/register.html", context)
-
-
-    

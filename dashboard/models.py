@@ -36,18 +36,19 @@ class Assignment(models.Model):
 
 class MultipleChoiceQuestion(models.Model):
     question = models.CharField(max_length=100)
-    choices = models.TextField()
-    answer = models.CharField(max_length=100)
+    option1 = models.CharField(max_length=100, default='')
+    option2 = models.CharField(max_length=100, default='')
+    option3 = models.CharField(max_length=100, default='')
+    option4 = models.CharField(max_length=100, default='')
+    answer = models.CharField(max_length=100, default='')
+    points = models.IntegerField(default=5)
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
 
 class Submission(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    status = models.CharField(max_length=20)
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    earned = models.IntegerField(default=0)
+    possible = models.IntegerField(default=0)
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    student = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
 
 class DiscussionPost(models.Model):
     title = models.CharField(max_length=100)

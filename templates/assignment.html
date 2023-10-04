@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="main-content">
+    <section class="asm-two-column">
+        <section class="main-column">
+            <section class="container">
+                <section class="container-header">
+                    <h3>{{assignment.name}}</h3>
+                </section>
+                <section class="container-body">
+                    <p>{{assignment.description}}</p>
+                    <strong>Due Date: {{assignment.due_date}}</strong>
+
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {% for question in questions %}
+                        <section class="question">
+                            <h4>{{question.question}}</h4>
+                            <section class="choices">
+                                <section class="choice">
+                                    <input type="radio" name="{{question.question}}" value="A">
+                                    <label for="A">{{question.option1}}</label>
+                                </section>
+                                <section class="choice">
+                                    <input type="radio" name="{{question.question}}" value="B">
+                                    <label for="B">{{question.option2}}</label>
+                                </section>
+                                <section class="choice">
+                                    <input type="radio" name="{{question.question}}" value="C">
+                                    <label for="C">{{question.option3}}</label>
+                                </section>
+                                <section class="choice">
+                                    <input type="radio" name="{{question.question}}" value="D">
+                                    <label for="D">{{question.option4}}</label>
+                                </section>
+                            </section>
+                        </section>
+                        {% endfor %}
+                        <button type="submit">Submit</button>
+                    </form>
+                </section>
+            </section>
+        </section>
+        <aside class="secondary-column">
+        </aside>
+    </section>
+</main>
+    
+{% endblock content %}

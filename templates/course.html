@@ -29,7 +29,7 @@
                                 <h4>{{assignment.name}}</h4>
                                 <p>{{assignment.description}}</p>
                                 <strong>Due Date: {{assignment.due_date}}</strong>
-                                
+                                <a href="{% url 'view_assignment' assignment.id course.id %}">View Assignment</a>
                             </section>
                             {% endfor %}
                         </section>
