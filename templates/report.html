@@ -8,7 +8,8 @@
                 <section class="container-header">
                     <h3>{{ course_name }}</h3>
                 </section>
-                <section class="container-body">
+                <section class="container-body grade-report">
+                    {% if assignments %}
                     <section class="assignments">
                         {% for assignment_name, submissions in assignments.items %}
                         <section class="assignment">
@@ -17,17 +18,20 @@
                             <section class="submissions">
                                 {% for submission in submissions %}
                                     <section class="submission">
+                                        <p>{{submission.created_at}}</p>
                                         <strong>{{ submission.earned }} / {{submission.possible}}</strong>
                                     </section>
                                 {% endfor %}
                             </section>
                             {% else %}
-                            <p>No submissions for this assignment</p>
+                            <p class="empty">No submissions for this assignment</p>
                             {% endif %}
                         </section>
                         {% endfor %}
                     </section>
-
+                    {% else %}
+                        <p class="empty">No assignments have been posted.</p>
+                    {% endif %}
                 </section>
             </section>
             {% endfor %}

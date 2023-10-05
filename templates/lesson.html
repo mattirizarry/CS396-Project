@@ -2,22 +2,35 @@
 
 {% block content %}
 
-    <section class="asm-two-column">
-        <section class="main-column">
-            {{lesson.lessonBody |safe}}
-        </section>
-        <aside class="secondary-column">
-            <h3>Files Shared By Professor</h3>
-            <section class="files">
-                {% if lesson.lessonFiles %}
-                    <div>
-                        <a href="{{ lesson.lessonFiles.url }}" download>{{ lesson.lessonFiles.name }}</a>
-                    </div>
-                {% else %}
-                    <p>No file shared by professor.</p>
-                {% endif %}
+<section class="asm-two-column">
+    <section class="main-column">
+        <section class="container">
+            <section class="container-header">
+                <h3>{{lesson.name}}</h3>
             </section>
-        </aside>
+            <section class="container-body lesson">
+                {{lesson.lessonBody |safe}}
+            </section>
+        </section>
     </section>
+    <aside class="secondary-column">
+        <section class="container">
+            <section class="container-header">
+                <h3>Lesson Files</h3>
+            </section>
+            <section class="container-body">
+                <section class="lesson-files">
+                    {% if lesson.lessonFiles %}
+                        <section class="lesson-file">
+                            <a href="{{ lesson.lessonFiles.url }}" download>{{ lesson.lessonFiles.name }}</a>
+                        </section>
+                    {% else %}
+                        <p>No file shared by professor.</p>
+                    {% endif %}
+                </section>
+            </section>
+        </section>
+    </aside>
+</section>
 
 {% endblock content %}

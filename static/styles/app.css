@@ -2,6 +2,9 @@
 
 @import 'pages/index.css';
 @import 'pages/course.css';
+@import 'pages/lesson.css';
+@import 'pages/report.css';
+@import 'pages/teacher-report.css';
 
 @import 'components/header.css';
 @import 'components/footer.css';

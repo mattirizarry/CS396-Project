@@ -1,12 +1,12 @@
 .site-header {
     background: var(--accent);
     display: grid;
-    grid-template-rows: 14rem 26rem;
+    grid-template-rows: 14rem 18rem;
 }
 
 .site-header .jumbotron {
     padding: 2rem 4rem;
-    height: 26rem;
+    height: 18rem;
     display: grid;
 }
 

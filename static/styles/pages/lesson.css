@@ -1,0 +1,47 @@
+.lesson {
+  font-size: 1.4rem;
+}
+
+.lesson h1 {
+  font-size: 3.2rem;
+  margin-top: 2.4rem;
+}
+
+.lesson h2 {
+  font-size: 2.8rem;
+  margin-top: 2rem;
+}
+
+.lesson h3 {
+  font-size: 2.4rem;
+  margin-top: 1.6rem;
+}
+
+.lesson h4 {
+  font-size: 2rem;
+  margin-top: 1.2rem;
+}
+
+.lesson h5 {
+  font-size: 1.6rem;
+  margin-top: 0.8rem;
+}
+
+.lesson h6 {
+  font-size: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+.lesson hr {
+  margin: 0.8rem 0 0.6rem;
+}
+
+.lesson a {
+  color: var(--accent);
+}
+
+.lesson-files .lesson-file a {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+}

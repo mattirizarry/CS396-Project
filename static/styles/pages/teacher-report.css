@@ -1,0 +1,43 @@
+.class-reports  {
+    background: var(--tertiary);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.class-reports .course-report {
+    background: var(--tertiary);
+}
+
+.class-reports .course-report .empty, .class-reports .course-report .assignments .assignment {
+    font-size: 1.6rem;
+    padding: 2rem;
+    background: var(--quint);
+}
+
+.class-reports .course-report .assignments {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.class-reports .course-report .assignments .assignment .students {
+    display: grid;
+    background: var(--quint);
+    row-gap: 0.2rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student {
+    display: grid;
+    grid-template-columns: 1fr 8rem;
+    justify-content: space-between;
+    background: var(--quad);
+    padding: 0.4rem 1rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student h5 {
+    align-self: center;
+    justify-self: start;
+}
+
+.class-reports .course-report .assignments .assignment .students .student strong {
+    align-self: center;
+    justify-self: end;
+}

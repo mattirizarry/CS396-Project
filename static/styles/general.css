@@ -17,7 +17,7 @@ body {
     display: grid;
     /* create a grid with the top row being 14 rem, the bottom row being 46rem, and it should at least show what is left in the middle */
 
-    grid-template-rows: 40rem 1fr 18rem;
+    grid-template-rows: 32rem 1fr 18rem;
     min-height: 100svh;
 }
 

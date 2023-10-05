@@ -1,0 +1,33 @@
+.grade-report {
+    background: var(--tertiary);
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    font-size: 1.6rem;
+}
+
+.grade-report .assignments {
+    display: grid;
+    row-gap: 2rem;
+}
+
+.grade-report .assignments .assignment .empty {
+    background: var(--quint);
+    padding: 1rem 1.2rem;
+}
+
+.grade-report .assignments .assignment .submissions {
+    display: grid;
+    row-gap: 0.2rem;
+}
+
+.grade-report .assignments .assignment .submissions .submission {
+    display: grid;
+    grid-template-columns: 1fr 6rem;
+    background: var(--quint);
+    padding: 1rem 1.2rem;
+}
+
+.grade-report .assignments .assignment .submissions .submission strong {
+    align-self: center;
+    justify-self: end;
+}

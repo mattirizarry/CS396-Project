@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 
@@ -51,6 +52,7 @@ class Submission(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class DiscussionPost(models.Model):
     title = models.CharField(max_length=100)
