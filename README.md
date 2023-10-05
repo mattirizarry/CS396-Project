@@ -1,5 +1,12 @@
 # Test Accounts
 
+## Supabase Admin Account
+
+```
+
+qejMWjuaM)SFB2Y
+```
+
 ## Admin Account
 
 ```
