@@ -29,7 +29,7 @@
 
 .container-body.half .half-column section section .assignment-details {
     display: grid;
-    grid-template-columns: 3fr 5fr;
+    grid-template-columns: 1fr 2fr;
 }
 
 .container-body.half .half-column section section .assignment-details strong {

@@ -60,8 +60,6 @@ body {
 }
 
 .btn {
-    justify-self: end;
-    align-self: center;
     text-decoration: none;
     color: var(--text);
     background: var(--background);
@@ -69,6 +67,32 @@ body {
     border-radius: 2rem;
     font-size: 1.6rem;
     font-weight: bolder;
+    border: none;
+    text-align: center;
+}
+
+.btn.left {
+    justify-self: start;
+}
+
+.btn.right {
+    justify-self: end;
+}
+
+.btn.center {
+    justify-self: center;
+}
+
+.btn.top {
+    align-self: start;
+}
+
+.btn.bottom {
+    align-self: end;
+}
+
+.btn.middle {
+    align-self: center;
 }
 
 .btn.accent {

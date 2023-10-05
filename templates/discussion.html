@@ -46,11 +46,25 @@
             </section>
         </section>
         <aside class="secondary-column">
-            <form class="create-discussion-comment-form" action="{% url 'create_comment' post_id=discussion.id %}" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Create Comment</button>
-            </form>
+            <section class="container">
+                <section class="container-header">
+                    <h3>Reply</h3>
+                </section>
+                <section class="container-body">
+                    <form class="form create-discussion-comment-form" action="{% url 'create_comment' post_id=discussion.id %}" method="post">
+                        {% csrf_token %}
+                    
+                        <section class="form-inputs">
+                            <section class="form-input">
+                                <label for="{{ form.commentBody.id_for_label }}">Your Reply</label>
+                                {{ form.commentBody }}
+                            </section>
+                        </section>
+                    
+                        <button class="btn accent middle right" type="submit">Create Reply</button>
+                    </form>
+                </section>
+            </section>
         </aside>
     </section>
 

@@ -1,10 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <form class="create-discussion-post-form" action="." method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create Discussion Post</button>
-    </form>
+<section class="asm-two-column">
+    <section class="main-column">
+        <section class="container">
+            <section class="container-header">
+                <h3>Create Discussion Post</h3>
+            </section>
+            <section class="container-body">
+                <form class="form create-discussion-post-form" action="." method="post">
+                    {% csrf_token %}
+
+                    <section class="form-inputs">
+                        {% for field in form %}
+                            <section class="form-input">{{ field.label_tag }} {{ field }}</section>
+                        {% endfor %}
+                    </section>
+                
+                    <button class="btn accent middle right" type="submit">Create Discussion Post</button>
+                </form>
+            </section>
+        </section>
+    </section>
+</section>
 
 {% endblock content %}

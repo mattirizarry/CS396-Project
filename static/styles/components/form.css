@@ -1,0 +1,51 @@
+.form {
+    display: grid;
+    row-gap: 2rem;
+}
+
+.form .form-inputs {
+    
+    display: grid;
+    row-gap: 0.8rem;
+}
+
+.form .form-inputs .form-input {
+    display: grid;
+    grid-template-rows: 3rem 1fr;
+    row-gap: 1.2rem;
+}
+
+.form .form-inputs .form-input label {
+    font-size: 1.6rem;
+    font-weight: 600;
+    align-self: end;
+}
+
+.form .form-inputs .form-input.multiple-choice  {
+    padding: 0 1.2rem 1rem;
+    background: var(--quint);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.form .form-inputs .form-input.multiple-choice h4 {
+    align-self: end;
+    font-size: 1.8rem;
+}
+
+.form .form-inputs .form-input.multiple-choice .choices {
+    display: grid;
+    row-gap: 0.6rem;
+}
+
+.form .form-inputs .form-input.multiple-choice .choices .choice label {
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.form .form-inputs .form-input input, .form .form-inputs .form-input textarea {
+    font-size: 1.6rem;
+    padding: 0.8rem;
+    border-radius: 0.4rem;
+    border: 1px solid #ccc;
+    font-family: Open Sans, sans-serif;
+}
