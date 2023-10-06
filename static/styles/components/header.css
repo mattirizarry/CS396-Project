@@ -1,5 +1,5 @@
 .site-header {
-    background: var(--accent);
+    background: url('/static/images/hero.jpg');
     display: grid;
     grid-template-rows: 14rem 18rem;
 }

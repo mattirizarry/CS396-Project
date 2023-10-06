@@ -27,7 +27,7 @@
     width: 100%;
     grid-template-columns: 1fr 8rem;
     justify-content: space-between;
-    background: var(--accent);
+    background: url('/static/images/hero.jpg');
     padding: 2rem 1rem;
 }
 

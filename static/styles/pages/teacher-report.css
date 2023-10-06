@@ -3,19 +3,14 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
-.class-reports .course-report {
-    background: var(--tertiary);
-}
-
 .class-reports .course-report .empty, .class-reports .course-report .assignments .assignment {
     font-size: 1.6rem;
-    padding: 2rem;
-    background: var(--quint);
+    background: var(--tertiary);
 }
 
 .class-reports .course-report .assignments {
     display: grid;
-    row-gap: 1rem;
+    row-gap: 2rem;
 }
 
 .class-reports .course-report .assignments .assignment .students {

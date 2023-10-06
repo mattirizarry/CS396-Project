@@ -6,10 +6,30 @@
 
 {% block content %}
 
-        <form class="registration-form" action="." method="post">
+<section class="asm-two-column">
+  <section class="main-column">
+    <section class="container">
+      <section class="container-header">
+        <h1>Register an Account</h1>
+      </section>
+      <section class="container-body">
+          <form class="form registration-form" action="." method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Register</button>
+            <section class="form-inputs">
+              {% for field in form %}
+                  <section class="form-input">{{ field.label_tag }} {{ field }}</section>
+                {% endfor %}
+            </section>
+            <section class="buttons">
+              <a class="btn middle left" href="{% url 'login' %}">Already have an account?</a>
+              <button class="btn accent middle right" type="submit">Register</button>
+            </section>
         </form>
+      </section>
+    </section>
+  </section>
+</section>
+
+        
 
 {% endblock content %}
