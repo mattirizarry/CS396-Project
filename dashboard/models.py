@@ -6,7 +6,6 @@ from ckeditor.fields import RichTextField
 class Profile(AbstractUser):
     role = models.PositiveSmallIntegerField(default=0)
     
-
 class Course(models.Model):
     code = models.CharField(max_length=10)
     name = models.CharField(max_length=100)

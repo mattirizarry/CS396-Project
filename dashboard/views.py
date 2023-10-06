@@ -161,20 +161,6 @@ def view_assignment(request, course_id, assignment_id):
 def view_discussion(request, discussion_id):
     discussion = DiscussionPost.objects.get(id=discussion_id)
     comments = DiscussionComment.objects.filter(post=discussion_id)
-
-    if request.method == "POST":
-        form = CreateDiscussionCommentForm(request.POST)
-
-        if form.is_valid():
-            user = request.user
-
-            created_post = form.save(commit=False)
-            created_post.user = user
-            created_post.save()
-
-            
-
-            return redirect("index")
         
     form = CreateDiscussionCommentForm()
 
