@@ -9,6 +9,13 @@
     row-gap: 0.8rem;
 }
 
+.form .buttons {
+    justify-self: end;
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 2rem;
+}
+
 .form .form-inputs .form-input {
     display: grid;
     grid-template-rows: 3rem 1fr;

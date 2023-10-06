@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+
+{% block title %}
+  Login | CS396 Project
+{% endblock title %}
+
 {% block content %}
 
 <section class="asm-two-column">
@@ -8,21 +13,22 @@
                 <h3>Login</h3>
             </section>
             <section class="container-body">
-                <form class="form" action="{% url 'login' %}" method="post">
+                <form class="form login-form" action="{% url 'login' %}" method="post">
                     {% csrf_token %}
                     <section class="form-inputs">
                         {% for field in form %}
                             <section class="form-input">{{ field.label_tag }} {{ field }}</section>
                         {% endfor %}
                     </section>
-                    <button type="submit" class="btn accent middle right">Login</button>
+                    <section class="buttons">
+                        <button type="submit" class="btn accent middle right">Login</button>
+                        <a class="btn " href="{% url 'password_reset' %}">Forgot Password?</a>
+                        <a class="btn" href="{% url 'register' %}">Register</a>
+                    </section>
                 </form>
             </section>
         </section>
     </section>
-    <aside>
-        <a href="{% url 'password_reset' %}">Forgot Password?</a> | <a href="{% url 'register' %}">Register</a>
-    </aside>
 </section>
 
 {% endblock content %}

@@ -1,0 +1,5 @@
+.form.login-form {
+    background: var(--tertiary);
+    padding: 2rem;
+    box-shadow: 0 0 1rem 0px rgba(0, 0, 0, 0.5);
+}

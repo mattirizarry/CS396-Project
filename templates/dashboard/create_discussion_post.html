@@ -11,6 +11,7 @@
                 <form class="form create-discussion-post-form" action="." method="post">
                     {% csrf_token %}
 
+                    {{ form.media }}
                     <section class="form-inputs">
                         {% for field in form %}
                             <section class="form-input">{{ field.label_tag }} {{ field }}</section>

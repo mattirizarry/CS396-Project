@@ -55,13 +55,13 @@ class Submission(models.Model):
 
 class DiscussionPost(models.Model):
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = RichTextField(default='')
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
 class DiscussionComment(models.Model):
-    commentBody = models.TextField()
+    commentBody = RichTextField(default='')
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)

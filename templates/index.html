@@ -1,6 +1,10 @@
 {% extends 'base.html' %} 
 {% load static %}
 
+{% block title %}
+  Home
+{% endblock title %}
+
 {% block content %}
   <section class="asm-two-column">
     <section class="main-column">
@@ -55,7 +59,7 @@
               </section>
               <section class="discussion-body">
                 <h4>{{discussion.title}}</h4>
-                <p>{{discussion.description}}</p>
+                <p>{{discussion.description |safe}}</p>
               </section>
               <section class="discussion-buttons">
                 <section class="ratio">

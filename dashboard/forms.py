@@ -3,6 +3,8 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
+from ckeditor.widgets import CKEditorWidget
+
 from .models import DiscussionPost, DiscussionComment
 
 class RegistrationForm(UserCreationForm):
@@ -55,39 +57,14 @@ class RegistrationForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
 class CreateDiscussionPostForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(CreateDiscussionPostForm, self).__init__(*args, **kwargs)
-
-        self.fields['title'].widget.attrs.update(
-            {
-                'class': 'title',
-                'placeholder': 'title',
-                'id': 'title',
-                'name': 'title',
-                'type': 'text'
-            }
-        )
-
-        self.fields['description'].widget.attrs.update(
-            {
-                'class': 'description',
-                'placeholder': 'description',
-                'id': 'description',
-                'name': 'description',
-                'type': 'text'
-            }
-        )
-
+    description = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = DiscussionPost
         fields = ['title', 'description']
 
 class CreateDiscussionCommentForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(CreateDiscussionCommentForm, self).__init__(*args, **kwargs)
-
-        self.fields['commentBody'].widget = forms.Textarea(attrs={'rows': 4, 'placeholder': 'Add your comment here...'})
+    commentBody = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = DiscussionComment

@@ -62,13 +62,14 @@ body {
 .btn {
     text-decoration: none;
     color: var(--text);
-    background: var(--background);
+    background: #272727;
     padding: 1rem 2rem;
     border-radius: 2rem;
     font-size: 1.6rem;
     font-weight: bolder;
     border: none;
     text-align: center;
+    cursor: pointer;
 }
 
 .btn.left {
