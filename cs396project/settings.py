@@ -37,7 +37,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ALLOWED_HOSTS = ['0.0.0.0']
-CSRF_TRUSTED_ORIGINS = ["https://arcane-springs-43970-b899977c5353.herokuapp.com"]
+CSRF_TRUSTED_ORIGINS = ["https://cs396.irizarry.dev"]
 
 
 # Application definition
