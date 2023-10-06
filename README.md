@@ -129,3 +129,30 @@ Log-in to any of these accounts to test their access.
 | drxia | qejMWjuaM)SFB2Y | Teacher |
 | DrLi | qejMWjuaM)SFB2Y | Teacher |
 | mattirizarry | etu6Mpf.{Q | Student |
+
+# Project phase 2
+
+Students are required to learn multiple subjects, such as Math, Science, Reading, Writing, etc, There are a number of questions for each subject, and students need to finish all of them. For each question, students have three submission attempts. 
+
+>- Multiple Courses
+>- Courses should have many questions, and students should have a due date. Finally, each one should have `n` submission attempts.
+
+The task in project phase 2 is to keept students’ learning outcomes for students and teachers. Teachers are able to see all students’ scores for each subject,  each question number and each attempt. All questions should be kept in the database.  
+
+>- Teachers able to see all student's grades for each subject, question number, and attempt. 
+
+The database design should be in the 3rd normal form.
+
+> - Database design should be in 3rd normal form.
+
+You should provide a search function for users to search information based on key words. 
+
+> - Search through lessons??
+
+Please submit a zip file, including 1. ReadMe 2. Project report 3. Source codes.
+ReadMe file includes major instruction steps for repeating your project results. Anyone should be able to follow the instructions and run your source codes correctly. Please do not forget system setting up.
+In project report, please include:
+1. Project description
+2  Functions that you have implemented 
+3. Database Design (ER model),  Database Schema, Normalization (3rd norml checking).
+4. Summary/Discussion
