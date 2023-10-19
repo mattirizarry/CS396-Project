@@ -90,6 +90,14 @@ Overall, I will be keeping Django in my toolbelt for future projects, as I think
 
 ## Setup Local Environment
 
+0. ### Setup Database 
+
+```
+brew install postgresql
+echo 'export PATH="/usr/local/opt/postgresql@16/bin:$PATH"' >> ~/.zshrc
+brew services start postgresql@16
+```
+
 1. ### Install Heroku CLI
 
     Follow the guide below for steps depending on your operating system.

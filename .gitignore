@@ -3,3 +3,5 @@ dashboard/migrations/__pycache__
 cs396project/__pycache__
 
 .env
+__pycache__/
+db.sqlite3
