@@ -46,6 +46,7 @@ class Assignment(models.Model):
     due_date = models.DateTimeField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+    attempts = models.IntegerField(default=1)
 
     # Foreign Keys
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -71,17 +72,28 @@ class MultipleChoiceQuestion(models.Model):
 
 class Submission(models.Model):
     # Model Attributes
+    created_at = models.DateTimeField(auto_now_add=True)
     earned = models.IntegerField(default=0)
     possible = models.IntegerField(default=0)
-    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
 
     # Foreign Keys
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    
+class SubmissionAnswer(models.Model):
+    # Model Attributes
+    answer = models.CharField(max_length=100, default='')
+    points = models.IntegerField(default=0)
+    possible = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Foreign Keys
+    submission = models.ForeignKey(Submission, on_delete=models.CASCADE)
+    question = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username + " - " + self.assignment.name
+        return f'{self.question.question} - {self.points}/{self.possible}'
 
 class DiscussionPost(models.Model):
     # Model Attributes

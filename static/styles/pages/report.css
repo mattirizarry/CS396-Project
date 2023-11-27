@@ -10,24 +10,35 @@
     row-gap: 2rem;
 }
 
-.grade-report .assignments .assignment .empty {
+.grade-report .assignments .assignment {
+    display: grid;
+    row-gap: 2rem;
     background: var(--quint);
-    padding: 1rem 1.2rem;
+    padding: 2rem;
 }
 
 .grade-report .assignments .assignment .submissions {
     display: grid;
-    row-gap: 0.2rem;
+    row-gap: 2rem;
 }
 
 .grade-report .assignments .assignment .submissions .submission {
     display: grid;
-    grid-template-columns: 1fr 6rem;
-    background: var(--quint);
+    background: var(--quad);
     padding: 1rem 1.2rem;
 }
 
-.grade-report .assignments .assignment .submissions .submission strong {
+.grade-report .assignments .assignment .submissions .submission .answers {
+    margin-top: 2rem;
+    display: grid;
+}
+
+.grade-report .assignments .assignment .submissions .submission .answers .answer {
+    display: grid;
+    grid-template-columns: 1fr 8rem;
+}
+
+.grade-report .assignments .assignment .submissions .submission .answers .answer strong {
     align-self: center;
     justify-self: end;
 }

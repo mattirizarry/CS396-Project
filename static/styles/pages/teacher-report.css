@@ -21,15 +21,36 @@
 
 .class-reports .course-report .assignments .assignment .students .student {
     display: grid;
-    grid-template-columns: 1fr 8rem;
-    justify-content: space-between;
     background: var(--quad);
-    padding: 0.4rem 1rem;
+    padding: 1rem 2rem;
 }
 
 .class-reports .course-report .assignments .assignment .students .student h5 {
-    align-self: center;
-    justify-self: start;
+    place-self: start;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student .submissions {
+    display: grid;
+    row-gap: 1rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student .submissions .submission {
+    display: grid;
+    background: #777;
+    padding: 2rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student .submissions .submission .answers {
+    display: grid;
+    grid-auto-flow: row;
+    margin-top: 1rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student .submissions .submission .answers .answer {
+    display: grid;
+    grid-template-columns: 1fr 8rem;
 }
 
 .class-reports .course-report .assignments .assignment .students .student strong {

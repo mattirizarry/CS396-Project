@@ -36,7 +36,7 @@
                                 <section class="assignment">
                                     <section class="assignment-details">
                                         <h5>{{assignment.name}}</h5>
-                                        <strong>Due Date: {{assignment.due_date}}</strong>
+                                        <strong>Due Date: {{assignment.due_date}} - {{assignment.attempts}} attempt(s)</strong>
                                     </section>
                                     <a class="btn" href="{% url 'view_assignment' course.id assignment.id %}">View Assignment</a>
                                 </section>

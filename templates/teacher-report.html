@@ -13,7 +13,7 @@
                     <h3>Class Reports</h3>
                 </section>
                 <section class="container-body class-reports">
-                    {% for course_name, assignments in submission_dict.items %}
+                    {% for course_name, assignments in course_dict.items %}
                     <section class="container">
                         <section class="container-header">
                             <h3>{{ course_name }}</h3>
@@ -29,7 +29,22 @@
                                                 <section class="student">
                                                     <h5>{{student_name}}</h5>
                                                     {% if submissions %}
-                                                        <strong>{{ submissions.earned }}</strong>
+                                                    <section class="submissions">
+                                                        {% for submission, answers in submissions.items %}
+                                                        <section class="submission">
+                                                            <h4>Submission - {{answers.submission.earned}} / {{answers.submission.possible}}</h4>
+                                                            <em>{{answers.submission.created_at}}</em>
+                                                            <section class="answers">
+                                                                {% for attempt in answers.answers %}
+                                                                <section class="answer">
+                                                                    <p>{{attempt.question}}</p>
+                                                                    <strong>{{attempt.points}} / {{attempt.possible}}</strong>
+                                                                </section>
+                                                                {% endfor %}
+                                                            </section>
+                                                        </section>
+                                                        {% endfor %}
+                                                    </section>
                                                     {% else %}
                                                         <p>No submissions for this assignment</p>
                                                     {% endif %} 

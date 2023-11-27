@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 
 from .forms import RegistrationForm, CreateDiscussionPostForm, CreateDiscussionCommentForm
-from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson, MultipleChoiceQuestion, Submission, Profile
+from .models import Course, DiscussionPost, DiscussionComment, Assignment, Lesson, MultipleChoiceQuestion, Submission, Profile, SubmissionAnswer
 
 # ===========================================
 #             /
@@ -36,39 +36,48 @@ def teacher_report(request):
         return redirect("login")
 
     courses = Course.objects.filter(instructor=request.user)
-    assignments = Assignment.objects.filter(course__in=courses)
-    submissions = Submission.objects.filter(course__in=courses)
-    students = Profile.objects.filter(courses__in=courses)
 
-    # create a dictionary following this style dict[coursename][assignmentname] = [submissions]
-
-    submission_dict = {}
+    course_dict = {}
 
     for course in courses:
-        course_assignments = assignments.filter(course=course)
-        course_submissions = submissions.filter(course=course)
+
+        assignments = Assignment.objects.filter(course=course)
 
         assignment_dict = {}
 
-        for assignment in course_assignments:
+        for assignment in assignments:
+
+            students = Profile.objects.filter(courses=course)
 
             student_dict = {}
 
             for student in students:
-                student_submissions = course_submissions.filter(user=student)
-                max_submission = student_submissions.order_by('-earned').first()
-                
-                student_dict[student.username] = max_submission
-            
-            assignment_dict[assignment.name] = student_dict        
 
-        submission_dict[course.name] = assignment_dict
+                submissions = Submission.objects.filter(assignment=assignment, user=student)
+
+                submission_dict = {}
+
+                for submission in submissions:
+                    
+                    submission_answers = SubmissionAnswer.objects.filter(submission=submission)
+
+                    submission_dict[submission.id] = {
+                        'submission': submission,
+                        'answers': submission_answers
+                    }
+
+                student_dict[student.username] = submission_dict
+
+            assignment_dict[assignment.name] = student_dict
+
+        course_dict[course.name] = assignment_dict
+
 
     context = {
-        'submission_dict': submission_dict
+        'course_dict': course_dict
     }
 
-    print(submission_dict)
+    print(context)
 
     return render(request, "teacher-report.html", context)
 
@@ -97,6 +106,15 @@ def view_course(request, course_id):
     course = Course.objects.get(id=course_id)
     assignments = Assignment.objects.filter(course=course_id)
     lessons = Lesson.objects.filter(course=course_id)
+
+    # check to see if the user has already submitted more than their limit of submissions
+
+    for assignment in assignments:
+
+        submissions = Submission.objects.filter(assignment=assignment, user=request.user)
+
+        if len(submissions) >= assignment.attempts:
+            assignments = assignments.exclude(id=assignment.id)
 
     context = {
         "course": course,
@@ -129,22 +147,34 @@ def view_assignment(request, course_id, assignment_id):
     assignment = Assignment.objects.get(id=assignment_id, course_id=course_id)
     course = Course.objects.get(id=course_id)
     questions = MultipleChoiceQuestion.objects.filter(assignment=assignment_id)
+    submissions = Submission.objects.filter(assignment=assignment_id, user=request.user)
 
     if (request.method == "POST"):
         earned = 0
         possible = 0
 
+        if (len(submissions) >= assignment.attempts):
+            return redirect("view_course", course_id)
+
+        submission = Submission(assignment=assignment, user=request.user, course=course)
+        submission.save()
+
         for question in questions:
             possible += question.points
+            submission_answer = SubmissionAnswer(submission=submission, question=question, answer=request.POST.get(question.question))
+            submission_answer.possible = question.points
 
             if (question.answer == request.POST.get(question.question)):
                 earned += question.points
+                submission_answer.points = question.points
+            
+            submission_answer.save()
+            
+        submission.earned = earned
+        submission.possible = possible
 
-        # create a new submission object and save it to the database
-        submission = Submission(earned=earned, possible=possible, assignment=assignment, user=request.user, course=course)
         submission.save()
 
-        # return to the course page
         return redirect("view_course", course_id)
 
     context = {
@@ -270,12 +300,25 @@ def report(request):
 
         for assignment in course_assignments:
             assignment_submissions = course_submissions.filter(assignment=assignment)
-            assignment_dict[assignment.name] = list(assignment_submissions)
+            
+            submission_answer_dict = {}
+
+            for submission in assignment_submissions:
+                submission_answers = SubmissionAnswer.objects.filter(submission=submission)
+
+                submission_answer_dict[submission.id] = {
+                    'submission': submission,
+                    'answers': submission_answers
+                }
+
+            assignment_dict[assignment.name] = submission_answer_dict
 
         submission_dict[course.name] = assignment_dict
 
     context = {
         'submission_dict': submission_dict
     }
+
+    print(context)
 
     return render(request, "report.html", context)
