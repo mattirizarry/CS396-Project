@@ -18,7 +18,7 @@
           <section class="courses">
             {% if courses %} {% for course in courses %}
             <section class="course">
-              <section class="course-image"></section>
+              <img class="course-image" src="https://picsum.photos/500/300" />
               <section class="course-meta">
                 <section class="course-details">
                   <h4>{{course.code}}</h4>
@@ -54,7 +54,7 @@
 
             <section class="discussion">
               <section class="author-details">
-                <section class="author-image"></section>
+                <img class="author-image" src="https://picsum.photos/200/200" />
                 <h4>{{discussion.user}}</h4>
               </section>
               <section class="discussion-body">
@@ -81,7 +81,8 @@
       </section>
     </section>
     <aside class="secondary-column">
-      <section class="user-image"></section>
+
+      <img class="user-image" src="https://picsum.photos/500/500" />
       <section class="user-profile">
         <section class="user-details">
           <h3>{{ user.username }}</h3>
