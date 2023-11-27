@@ -39,6 +39,10 @@
                                                                 <section class="answer">
                                                                     <p>{{attempt.question}}</p>
                                                                     <strong>{{attempt.points}} / {{attempt.possible}}</strong>
+                                                                    <section class="response">
+                                                                        <p>Student response: {{attempt.answer}}</p>
+                                                                        <p>Correct response: {{attempt.question.answer}}</p>
+                                                                    </section>
                                                                 </section>
                                                                 {% endfor %}
                                                             </section>

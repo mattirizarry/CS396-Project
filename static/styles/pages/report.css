@@ -38,6 +38,10 @@
     grid-template-columns: 1fr 8rem;
 }
 
+.grade-report .assignments .assignment .submissions .submission .answers .answer .response {
+    padding: 2rem 1rem;
+}
+
 .grade-report .assignments .assignment .submissions .submission .answers .answer strong {
     align-self: center;
     justify-self: end;

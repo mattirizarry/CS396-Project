@@ -30,6 +30,10 @@
                                         <section class="answer">
                                             <p>{{answer.question.question}}</p>
                                             <strong>{{answer.points}} / {{answer.possible}}</strong>
+                                            <section class="response">
+                                                <p>Your response: {{answer.answer}}</p>
+                                                <p>Correct response: {{answer.question.answer}}</p>
+                                            </section>
                                         </section>
                                         {% endfor %}
                                     </section>

@@ -22,7 +22,7 @@
 .class-reports .course-report .assignments .assignment .students .student {
     display: grid;
     background: var(--quad);
-    padding: 1rem 2rem;
+    padding: 1rem 2rem 2rem;
 }
 
 .class-reports .course-report .assignments .assignment .students .student h5 {
@@ -51,6 +51,10 @@
 .class-reports .course-report .assignments .assignment .students .student .submissions .submission .answers .answer {
     display: grid;
     grid-template-columns: 1fr 8rem;
+}
+
+.class-reports .course-report .assignments .assignment .students .student .submissions .submission .answers .response {
+    padding: 2rem 1rem;
 }
 
 .class-reports .course-report .assignments .assignment .students .student strong {
