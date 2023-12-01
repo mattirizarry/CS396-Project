@@ -77,6 +77,8 @@ def teacher_report(request):
         'course_dict': course_dict
     }
 
+    print(context)
+
     return render(request, "teacher-report.html", context)
 
 # ===========================================
@@ -316,5 +318,7 @@ def report(request):
     context = {
         'submission_dict': submission_dict
     }
+
+    print(context)
 
     return render(request, "report.html", context)

@@ -16,7 +16,8 @@
 
 .courses .course .course-image {
     height: 28rem;
-    width: 100%;
+    width: auto;
+    background: var(--tertiary);
 }
 
 .courses .course .course-meta {
