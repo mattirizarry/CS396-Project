@@ -1,0 +1,28 @@
+.modal {
+    background-color: var(--secondary);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 50%;
+
+    transform: translate(-50%, -50%);
+    border: none;
+    box-shadow: 0 0 1rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+.modal .modal-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 2rem;
+    background: var(--accent);
+}
+
+.modal .modal-header h1 {
+    font-size: 2.8rem;
+    color: var(--background);
+}
+
+.modal .modal-body {
+    padding: 2rem;
+}
