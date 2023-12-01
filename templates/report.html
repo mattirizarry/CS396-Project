@@ -11,12 +11,12 @@
             {% for course_name, assignments in submission_dict.items %}
             <section class="container">
                 <section class="container-header">
-                    <h3>{{ course_name }}</h3>
+                    <h3>{{ course_name }} - {{assignments.course_grade}} / {{assignments.course_possible}} </h3>
                 </section>
                 <section class="container-body grade-report">
                     {% if assignments %}
                     <section class="assignments">
-                        {% for assignment_name, submissions in assignments.items %}
+                        {% for assignment_name, submissions in assignments.assignments.items %}
                         <section class="assignment">
                             <h4>{{ assignment_name }}</h4>
                             {% if submissions %}

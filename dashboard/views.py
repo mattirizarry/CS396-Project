@@ -296,10 +296,25 @@ def report(request):
 
         assignment_dict = {}
 
+        # Compute student grade
+        course_grade = 0
+        course_possible = 0 
+
         for assignment in course_assignments:
-            assignment_submissions = course_submissions.filter(assignment=assignment)
+            assignment_submissions = course_submissions.filter(assignment=assignment)            
             
             submission_answer_dict = {}
+
+            print(f'Assignment {assignment}')
+
+            # Get best score from submissions of assignment
+
+            best_submission = assignment_submissions.order_by('-earned').first()
+
+            course_grade += best_submission.earned * assignment.weight
+            course_possible += best_submission.possible * assignment.weight
+
+            print(f'Earned {best_submission.earned} / {best_submission.possible}')
 
             for submission in assignment_submissions:
                 submission_answers = SubmissionAnswer.objects.filter(submission=submission)
@@ -311,10 +326,18 @@ def report(request):
 
             assignment_dict[assignment.name] = submission_answer_dict
 
-        submission_dict[course.name] = assignment_dict
+        print(f'Grade for {course.name}: {course_grade} / {course_possible}')
+
+        submission_dict[course.name] = {
+            'assignments': assignment_dict,
+            'course_grade': course_grade,
+            'course_possible': course_possible
+        }
 
     context = {
-        'submission_dict': submission_dict
+        'submission_dict': submission_dict,
     }
+
+    print(context)
 
     return render(request, "report.html", context)
