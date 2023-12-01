@@ -16,18 +16,18 @@
                     {% for course_name, assignments in course_dict.items %}
                     <section class="container">
                         <section class="container-header">
-                            <h3>{{ course_name }} - {{assignments.best_class_average}}% - {{assignments.worst_class_average}}% - {{assignments.average_class_average}}%</h3>
+                            <h4>{{ course_name }} - Worst Average: {{assignments.worst_class_average}}% - Average: {{assignments.average_class_average}}% - Best Average: {{assignments.best_class_average}}%</h4>
                         </section>
                         <section class="container-body course-report">
                             {% if assignments %}
                             <sections class="assignments">
                                 {% for assignment_name, students in assignments.assignments.items %}
                                     <section class="assignment">
-                                        <h4>{{ assignment_name }} - Best Submission Class Average: {{students.best_class_average}}% - Worst Submission Class Average {{students.worst_class_average}}% - Average Submission Class Average: {{students.average_class_average}}%</h4>
+                                        <h4>{{ assignment_name }} - Worst Submission Average {{students.worst_class_average}}% - Average Submission Average: {{students.average_class_average}}% - Best Submission Average: {{students.best_class_average}}%</h4>
                                         <section class="students">
                                             {% for student_name, submissions in students.students.items %}
                                                 <section class="student">
-                                                    <h5>{{student_name}} - Best Submission: {{submissions.best}}% - Worst Submission: {{submissions.worst}}% - Average Submission: {{submissions.average}}%</h5>
+                                                    <h5>{{student_name}} - Worst Submission: {{submissions.worst}}% - Average Submission: {{submissions.average}}% - Best Submission: {{submissions.best}}% </h5>
                                                     {% if submissions %}
                                                     <section class="submissions">
                                                         {% for submission, answers in submissions.submissions.items %}

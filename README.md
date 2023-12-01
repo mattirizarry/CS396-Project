@@ -191,3 +191,13 @@ In project report, please include:
 2  Functions that you have implemented 
 3. Database Design (ER model),  Database Schema, Normalization (3rd norml checking).
 4. Summary/Discussion
+
+# Project Phase 3
+
+Based on project phases 1 and 2, the goal of phase 3  is to provide users with tools to measure and check students’ performance. Minimum requirements include:
+- Students can check the percentiles of their scores. 
+- Please use a bar chart to display students’ subject scores (Math/Science/Reading) over the past semesters (>=5). 
+- ~~Teachers can see all students’s scores, sort scores (ascending and descending), highest, lowest scores, and average scores.~~
+- ~~Teachers can compute students’ weight scores according to user-defined weights.~~
+- ~~Teachers can assign letter grades based on the weighted scores. Students can see only their grades~~
+- Use a pie chart to display the percentages of the letter grades.
