@@ -82,6 +82,9 @@ class Submission(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.assignment.name} - {self.course.code} - {self.course.name}'
     
 class SubmissionAnswer(models.Model):
     # Model Attributes

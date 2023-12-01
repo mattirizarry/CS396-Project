@@ -46,7 +46,9 @@ def teacher_report(request):
         assignment_dict = {}
 
         num_of_assignments = len(assignments)
-        assignment_class_average = 0
+        assignment_best_class_average = 0
+        assignment_worst_class_average = 0
+        assignment_average_class_average = 0
 
         for assignment in assignments:
 
@@ -54,10 +56,16 @@ def teacher_report(request):
 
             student_dict = {}
 
-            num_of_students = len(students)
-            students_earned = 0
-            students_possible = 0
-            class_average = 0
+            best_students_earned = 0
+            best_students_possible = 0
+            best_class_average = 0
+
+            worst_students_earned = 0
+            worst_students_possible = 0
+            worst_class_average = 0
+
+            average_students_earned = 0
+            average_students_possible = 0
 
             for student in students:
 
@@ -65,39 +73,92 @@ def teacher_report(request):
 
                 submission_dict = {}
 
-                # Get the best submission
+                student_best_earned = 0
+                student_best_possible = 0
+                student_best = 0
+
+                student_worst_earned = 0
+                student_worst_possible = 0
+                student_worst = 0
+
+                student_average_earned = 0
+                student_average_possible = 0
+                student_average = 0
+                num_of_submissions = len(submissions)
 
                 if (len(submissions) > 0):
                     best_submission = submissions.order_by('-earned').first()
+                    worst_submission = submissions.order_by('earned').first()
 
-                    students_earned += best_submission.earned * assignment.weight
-                    students_possible += best_submission.possible * assignment.weight
+                    student_best_earned += best_submission.earned * assignment.weight
+                    student_best_possible += best_submission.possible * assignment.weight
+
+                    student_worst_earned += worst_submission.earned * assignment.weight
+                    student_worst_possible += worst_submission.possible * assignment.weight
+
+                    best_students_earned += best_submission.earned * assignment.weight
+                    best_students_possible += best_submission.possible * assignment.weight
+
+                    worst_students_earned += worst_submission.earned * assignment.weight
+                    worst_students_possible += worst_submission.possible * assignment.weight
 
                 for submission in submissions:
                     
                     submission_answers = SubmissionAnswer.objects.filter(submission=submission)
+
+                    if (len(submissions) > 0):
+                        student_average_earned += submission.earned * assignment.weight
+                        student_average_possible += submission.possible * assignment.weight
+
+                        average_students_earned += submission.earned * assignment.weight
+                        average_students_possible += submission.possible * assignment.weight
 
                     submission_dict[submission.id] = {
                         'submission': submission,
                         'answers': submission_answers
                     }
 
-                student_dict[student.username] = submission_dict
+                if (student_best_earned > 0):
+                    student_best = 100 * student_best_earned / student_best_possible
 
-            class_average = 100 * students_earned / students_possible
+                if (student_worst_earned > 0):
+                    student_worst = 100 * student_worst_earned / student_worst_possible
 
-            assignment_class_average += class_average
+                if (student_average_earned > 0):
+                    student_average = 100 * student_average_earned / student_average_possible
+
+                student_dict[student.username] = {
+                    'submissions': submission_dict,
+                    'best': student_best,
+                    'worst': student_worst,
+                    'average': student_average
+                }
+
+            best_class_average = 100 * best_students_earned / best_students_possible
+            worst_class_average = 100 * worst_students_earned / worst_students_possible
+
+            assignment_best_class_average += best_class_average
+            assignment_worst_class_average += worst_class_average
+
+            assignment_average_class_average += average_students_earned / average_students_possible
 
             assignment_dict[assignment.name] = {
                 'students': student_dict,
-                'class_average': class_average
+                'best_class_average': best_class_average,
+                'worst_class_average': worst_class_average,
+                'average_class_average': 100 * average_students_earned / average_students_possible
             }
 
-        assignment_class_average /= num_of_assignments
+        assignment_best_class_average /= num_of_assignments
+        assignment_worst_class_average /= num_of_assignments
+        assignment_average_class_average /= num_of_assignments
+        assignment_average_class_average *= 100
 
         course_dict[course.name] = {
             'assignments': assignment_dict,
-            'class_average': assignment_class_average
+            'best_class_average': assignment_best_class_average,
+            'worst_class_average': assignment_worst_class_average,
+            'average_class_average': assignment_average_class_average
         }
 
     context = {
@@ -332,8 +393,6 @@ def report(request):
             
             submission_answer_dict = {}
 
-            print(f'Assignment {assignment}')
-
             # Get best score from submissions of assignment
 
             if (len(assignment_submissions) > 0):
@@ -352,8 +411,6 @@ def report(request):
 
             assignment_dict[assignment.name] = submission_answer_dict
 
-        print(f'Grade for {course.name}: {course_grade} / {course_possible}')
-
         submission_dict[course.name] = {
             'assignments': assignment_dict,
             'course_grade': course_grade,
@@ -363,7 +420,5 @@ def report(request):
     context = {
         'submission_dict': submission_dict,
     }
-
-    print(context)
 
     return render(request, "report.html", context)
