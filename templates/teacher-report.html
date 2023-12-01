@@ -16,16 +16,16 @@
                     {% for course_name, assignments in course_dict.items %}
                     <section class="container">
                         <section class="container-header">
-                            <h3>{{ course_name }}</h3>
+                            <h3>{{ course_name }} - {{assignments.class_average}}%</h3>
                         </section>
                         <section class="container-body course-report">
                             {% if assignments %}
                             <sections class="assignments">
-                                {% for assignment_name, students in assignments.items %}
+                                {% for assignment_name, students in assignments.assignments.items %}
                                     <section class="assignment">
-                                        <h4>{{ assignment_name }}</h4>
+                                        <h4>{{ assignment_name }} - Class Average: {{students.class_average}}%</h4>
                                         <section class="students">
-                                            {% for student_name, submissions in students.items %}
+                                            {% for student_name, submissions in students.students.items %}
                                                 <section class="student">
                                                     <h5>{{student_name}}</h5>
                                                     {% if submissions %}
@@ -34,7 +34,7 @@
                                                         <section class="submission">
                                                             <h4>Submission - {{answers.submission.earned}} / {{answers.submission.possible}}</h4>
                                                             <em>{{answers.submission.created_at}}</em>
-                                                            <section class="answers">
+                                                            <!-- <section class="answers">
                                                                 {% for attempt in answers.answers %}
                                                                 <section class="answer">
                                                                     <p>{{attempt.question}}</p>
@@ -45,7 +45,7 @@
                                                                     </section>
                                                                 </section>
                                                                 {% endfor %}
-                                                            </section>
+                                                            </section> -->
                                                         </section>
                                                         {% endfor %}
                                                     </section>

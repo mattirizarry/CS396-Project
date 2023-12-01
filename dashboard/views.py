@@ -45,17 +45,33 @@ def teacher_report(request):
 
         assignment_dict = {}
 
+        num_of_assignments = len(assignments)
+        assignment_class_average = 0
+
         for assignment in assignments:
 
             students = Profile.objects.filter(courses=course)
 
             student_dict = {}
 
+            num_of_students = len(students)
+            students_earned = 0
+            students_possible = 0
+            class_average = 0
+
             for student in students:
 
                 submissions = Submission.objects.filter(assignment=assignment, user=student)
 
                 submission_dict = {}
+
+                # Get the best submission
+
+                if (len(submissions) > 0):
+                    best_submission = submissions.order_by('-earned').first()
+
+                    students_earned += best_submission.earned * assignment.weight
+                    students_possible += best_submission.possible * assignment.weight
 
                 for submission in submissions:
                     
@@ -68,10 +84,21 @@ def teacher_report(request):
 
                 student_dict[student.username] = submission_dict
 
-            assignment_dict[assignment.name] = student_dict
+            class_average = 100 * students_earned / students_possible
 
-        course_dict[course.name] = assignment_dict
+            assignment_class_average += class_average
 
+            assignment_dict[assignment.name] = {
+                'students': student_dict,
+                'class_average': class_average
+            }
+
+        assignment_class_average /= num_of_assignments
+
+        course_dict[course.name] = {
+            'assignments': assignment_dict,
+            'class_average': assignment_class_average
+        }
 
     context = {
         'course_dict': course_dict
@@ -309,12 +336,11 @@ def report(request):
 
             # Get best score from submissions of assignment
 
-            best_submission = assignment_submissions.order_by('-earned').first()
+            if (len(assignment_submissions) > 0):
+                best_submission = assignment_submissions.order_by('-earned').first()
 
-            course_grade += best_submission.earned * assignment.weight
-            course_possible += best_submission.possible * assignment.weight
-
-            print(f'Earned {best_submission.earned} / {best_submission.possible}')
+                course_grade += best_submission.earned * assignment.weight
+                course_possible += best_submission.possible * assignment.weight
 
             for submission in assignment_submissions:
                 submission_answers = SubmissionAnswer.objects.filter(submission=submission)
