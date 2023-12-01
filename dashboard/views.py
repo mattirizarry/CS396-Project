@@ -413,8 +413,7 @@ def report(request):
 
         submission_dict[course.name] = {
             'assignments': assignment_dict,
-            'course_grade': course_grade,
-            'course_possible': course_possible
+            'course_grade': course_grade / course_possible * 100
         }
 
     context = {

@@ -5,7 +5,6 @@
 {% endblock title %}
 
 {% block content %}
-
     <section class="asm-two-column">
         <section class="main-column">
             <section class="container">
@@ -16,25 +15,32 @@
                     {% for course_name, assignments in course_dict.items %}
                     <section class="container">
                         <section class="container-header">
-                            <h4>{{ course_name }} - Worst Average: {{assignments.worst_class_average}}% - Average: {{assignments.average_class_average}}% - Best Average: {{assignments.best_class_average}}%</h4>
+                            <h4>{{ course_name }}</h4>
+                            <button class="btn accent" onclick='toggleModal("class-modal-{{course_name}}"); renderClassModal("class-chart-{{course_name}}", "{{assignments.worst_class_average}}", "{{assignments.average_class_average}}", "{{assignments.best_class_average}}", "{{course_name}}")'>View Class Data</button>
                         </section>
                         <section class="container-body course-report">
                             {% if assignments %}
                             <sections class="assignments">
                                 {% for assignment_name, students in assignments.assignments.items %}
                                     <section class="assignment">
-                                        <h4>{{ assignment_name }} - Worst Submission Average {{students.worst_class_average}}% - Average Submission Average: {{students.average_class_average}}% - Best Submission Average: {{students.best_class_average}}%</h4>
+                                        <section class="assignment-header">
+                                            <h4>{{ assignment_name }}</h4>
+                                            <button class="btn accent" onclick="toggleModal('assignment-modal-{{assignment_name}}-{{course_name}}'); renderAssignmentModal('assignment-chart-{{assignment_name}}-{{course_name}}', '{{students.worst_class_average}}', '{{students.average_class_average}}', '{{students.best_class_average}}')">View Assignment Data</button>
+                                        </section>
                                         <section class="students">
                                             {% for student_name, submissions in students.students.items %}
                                                 <section class="student">
-                                                    <h5>{{student_name}} - Worst Submission: {{submissions.worst}}% - Average Submission: {{submissions.average}}% - Best Submission: {{submissions.best}}% </h5>
+                                                    <section class="student-header">
+                                                        <h5>{{student_name}}</h5>
+                                                        <button class="btn accent" onclick='toggleModal("student-modal-{{student_name}}-{{assignment_name}}-{{course_name}}"); renderStudentModal("student-chart-{{student_name}}-{{assignment_name}}-{{course_name}}", "{{submissions.worst}}", "{{submissions.average}}", "{{submissions.best}}", "{{assignment_name}} - {{course_name}}")'>View Student Data</button>
+                                                    </section>
                                                     {% if submissions %}
                                                     <section class="submissions">
                                                         {% for submission, answers in submissions.submissions.items %}
                                                         <section class="submission">
                                                             <h4>Submission</h4>
                                                             <em>{{answers.submission.created_at}}</em>
-                                                            <!-- <section class="answers">
+                                                            <section class="answers">
                                                                 {% for attempt in answers.answers %}
                                                                 <section class="answer">
                                                                     <p>{{attempt.question}}</p>
@@ -45,16 +51,34 @@
                                                                     </section>
                                                                 </section>
                                                                 {% endfor %}
-                                                            </section> -->
+                                                            </section>
                                                         </section>
                                                         {% endfor %}
                                                     </section>
                                                     {% else %}
                                                         <p>No submissions for this assignment</p>
                                                     {% endif %} 
+                                                    <dialog id="student-modal-{{student_name}}-{{assignment_name}}-{{course_name}}" class="modal">
+                                                        <section class="modal-header">
+                                                            <h1>Student Data</h1>
+                                                            <button class="btn" onclick='toggleModal("student-modal-{{student_name}}-{{assignment_name}}-{{course_name}}")'>Close</button>
+                                                        </section>
+                                                        <section class="modal-body">
+                                                            <canvas id='student-chart-{{student_name}}-{{assignment_name}}-{{course_name}}'></canvas>
+                                                        </section>
+                                                    </dialog>
                                                 </section>
                                             {% endfor %}
                                         </section>
+                                    <dialog id="assignment-modal-{{assignment_name}}-{{course_name}}" class="modal">
+                                        <section class="modal-header">
+                                            <h1>Assignment Data</h1>
+                                            <button class="btn" onclick='toggleModal("assignment-modal-{{assignment_name}}-{{course_name}}")'>Close</button>
+                                        </section>
+                                        <section class="modal-body">
+                                            <canvas id="assignment-chart-{{assignment_name}}-{{course_name}}"></canvas>
+                                        </section>
+                                    </dialog>
                                     </section>
                                 {% endfor %}
                             </sections>
@@ -62,11 +86,138 @@
                                 <p class="empty">No students have submitted work for this course</p>
                             {% endif %}
                         </section>
+
+                        <dialog id="class-modal-{{course_name}}" class="modal">
+                            <section class="modal-header">
+                                <h1>Class Data</h1>
+                                <button class="btn" onclick='toggleModal("class-modal-{{course_name}}")'>Close</button>
+                            </section>
+                            <section class="modal-body">
+                                <canvas id="class-chart-{{course_name}}"></canvas>
+                            </section>
+                        </dialog>
                     </section>
                     {% endfor %}
                 </section>
             </section>
         </section>
     </section>
+    <script type="text/javascript">
+        function toggleModal(modalId) {
+
+            console.log(modalId)
+            const modal = document.getElementById(modalId);
+
+            console.log(modal.id);
+            
+            if (modal.hasAttribute('open')) {
+                modal.close();
+            } else {
+                modal.showModal();
+            }
+        }
+
+        function renderClassModal(modalId, worst, average, best, course) {
+
+            console.log(modalId)
+
+            let classChart = document.getElementById(modalId).getContext('2d');
+
+            let classData = {
+                labels: ['Worst', 'Average', 'Best'],
+                datasets: [{
+                    label: course,
+                    data: [worst, average, best],
+                    backgroundColor: [
+                        'rgba(55, 55, 55)',
+                        'rgba(105, 105, 105)',
+                        'rgba(155, 155, 155)'
+                    ]
+                }]
+            };
+
+            let classOptions = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            classChart = new Chart(classChart, {
+                type: 'bar',
+                data: classData,
+                options: classOptions
+            });
+        }
+
+        function renderAssignmentModal(modalId, worst, average, best) {
+
+            console.log(modalId)
+
+            let assignmentChart = document.getElementById(modalId).getContext('2d');
+
+            let assignmentData = {
+                labels: ['Worst', 'Average', 'Best'],
+                datasets: [{
+                    label: 'Assignment',
+                    data: [worst, average, best],
+                    backgroundColor: [
+                        'rgba(55, 55, 55)',
+                        'rgba(105, 105, 105)',
+                        'rgba(155, 155, 155)'
+                    ]
+                }]
+            };
+
+            let assignmentOptions = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            assignmentChart = new Chart(assignmentChart, {
+                type: 'bar',
+                data: assignmentData,
+                options: assignmentOptions
+            });
+        }
+
+        function renderStudentModal(modalId, worst, average, best, assignment) {
+
+            console.log(modalId)
+
+            let studentChart = document.getElementById(modalId).getContext('2d');
+
+            let studentData = {
+                labels: ['Worst', 'Average', 'Best'],
+                datasets: [{
+                    label: assignment,
+                    data: [worst, average, best],
+                    backgroundColor: [
+                        'rgba(55, 55, 55)',
+                        'rgba(105, 105, 105)',
+                        'rgba(155, 155, 155)'
+                    ]
+                }]
+            };
+
+            let studentOptions = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            studentChart = new Chart(studentChart, {
+                type: 'bar',
+                data: studentData,
+                options: studentOptions
+            });            
+        }
+    </script>
 
 {% endblock content %}

@@ -3,6 +3,25 @@
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 }
 
+.course-report .assignments .assignment .assignment-header h4 {
+    align-self: center;
+}
+
+.course-report .assignments .assignment .assignment-header {
+    display: grid;
+    grid-template-columns: 1fr 24rem;
+}
+
+.course-report .assignments .assignment .students .student .student-header {
+    display: grid;
+    grid-template-columns: 1fr 24rem;
+}
+
+.course-report .assignments .assignment .students .student .student-header h5 {
+    align-self: center;
+    font-size: 1.8rem;
+}
+
 .class-reports .course-report .empty, .class-reports .course-report .assignments .assignment {
     font-size: 1.6rem;
     background: var(--tertiary);
@@ -23,12 +42,7 @@
     display: grid;
     background: var(--quad);
     padding: 1rem 2rem 2rem;
-}
-
-.class-reports .course-report .assignments .assignment .students .student h5 {
-    place-self: start;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    row-gap: 1rem;
 }
 
 .class-reports .course-report .assignments .assignment .students .student .submissions {
