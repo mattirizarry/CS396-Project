@@ -15,6 +15,7 @@ class Course(models.Model):
     end_date = models.DateField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+    semester = models.CharField(max_length=100, default='')
 
     # Foreign Keys
     assignments = models.ManyToManyField('Assignment', related_name='courses', blank=True)
@@ -47,6 +48,7 @@ class Assignment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     attempts = models.IntegerField(default=1)
+    weight = models.FloatField(default=1.0)
 
     # Foreign Keys
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
